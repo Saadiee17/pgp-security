@@ -123,10 +123,10 @@ export default function Industries() {
     <section
       id="industries"
       ref={sectionRef}
-      className="w-full py-24 sm:py-32 bg-midnight overflow-hidden"
+      className="w-full py-20 sm:py-24 lg:py-12 bg-midnight overflow-hidden lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
     >
       {/* Section Header */}
-      <div ref={headerRef} className="max-w-[1280px] mx-auto px-6 mb-12 text-center">
+      <div ref={headerRef} className="max-w-[1280px] mx-auto px-6 mb-10 lg:mb-8 text-center">
         <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
           INDUSTRIES WE SERVE
         </span>
@@ -146,7 +146,7 @@ export default function Industries() {
         {industries.map((industry, i) => (
           <div
             key={i}
-            className="industry-card group relative flex-shrink-0 w-[320px] sm:w-[360px] h-[420px] sm:h-[480px] rounded-2xl overflow-hidden cursor-pointer"
+            className="industry-card group relative flex-shrink-0 w-[320px] sm:w-[360px] h-[420px] sm:h-[440px] lg:h-[min(440px,55vh)] rounded-2xl overflow-hidden cursor-pointer"
           >
             {/* Background Image */}
             <img
@@ -155,13 +155,17 @@ export default function Industries() {
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,22,40,0.95)] via-[rgba(10,22,40,0.4)] to-transparent" />
+            {/* Gradient Overlay — stronger bottom band so subtext stays readable */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,12,24,0.98)] from-0% via-[rgba(10,22,40,0.85)] via-40% to-transparent to-75%" />
 
             {/* Content */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-              <h3 className="text-white text-xl sm:text-2xl font-semibold mb-2">{industry.name}</h3>
-              <p className="text-slate-light text-sm leading-relaxed mb-4">{industry.description}</p>
+              <h3 className="text-white text-xl sm:text-2xl font-semibold mb-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">
+                {industry.name}
+              </h3>
+              <p className="text-white/90 text-sm leading-relaxed mb-4 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
+                {industry.description}
+              </p>
               <span className="inline-flex items-center gap-2 text-gold text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                 Learn More <ArrowRight size={14} />
               </span>

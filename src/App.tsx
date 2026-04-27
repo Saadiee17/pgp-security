@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import CustomCursor from './components/CustomCursor'
 import Header from './sections/Header'
 import Hero from './sections/Hero'
 import StatsBar from './sections/StatsBar'
@@ -50,6 +51,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-deep-navy">
+      <CustomCursor />
       <Header />
       <main>
         <Hero />

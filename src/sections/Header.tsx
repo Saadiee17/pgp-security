@@ -80,12 +80,13 @@ export default function Header() {
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <span className="text-gold font-bold text-xl tracking-tight">PGP</span>
-            <span className="bg-gold text-gold-ink text-[10px] font-semibold px-3 py-1 rounded-full tracking-widest uppercase">
-              Since 1985
-            </span>
-          </div>
+          <a href="#hero" className="flex items-center">
+            <img
+              src="./pgp-logo.png"
+              alt="PGP Security — Serving Since 1985"
+              className="h-14 w-auto object-contain"
+            />
+          </a>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">

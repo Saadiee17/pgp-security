@@ -123,11 +123,35 @@ export default function WhyChooseUs() {
             {/* Floating Card */}
             <div
               ref={floatingCardRef}
-              className="absolute -bottom-6 -left-6 bg-midnight border border-border-subtle rounded-2xl p-6 sm:p-8 shadow-2xl opacity-0"
+              className="absolute -bottom-6 -left-6 bg-midnight border border-border-subtle rounded-2xl p-6 sm:p-8 shadow-2xl opacity-0 overflow-hidden"
             >
-              <div className="text-gold text-4xl sm:text-5xl font-extrabold">40+</div>
+              <div
+                className="absolute top-0 left-0 right-0 h-px"
+                style={{
+                  background:
+                    'linear-gradient(90deg, transparent 0%, rgb(var(--c-silver-light)) 50%, transparent 100%)',
+                }}
+              />
+              <div
+                className="text-4xl sm:text-5xl font-extrabold"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(180deg, rgb(var(--c-silver-light)) 0%, rgb(var(--c-gold)) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                40+
+              </div>
               <div className="text-slate text-sm mt-2">Years Protecting Houston</div>
-              <div className="w-12 h-0.5 bg-gold mt-3" />
+              <div
+                className="w-12 h-0.5 mt-3"
+                style={{
+                  background:
+                    'linear-gradient(90deg, rgb(var(--c-gold)) 0%, rgb(var(--c-silver)) 100%)',
+                }}
+              />
             </div>
           </div>
 
@@ -145,20 +169,32 @@ export default function WhyChooseUs() {
 
             {/* Differentiator List */}
             <div className="space-y-0">
-              {differentiators.map((item, i) => (
-                <div
-                  key={i}
-                  className="diff-item flex items-start gap-4 py-5 border-b border-border-subtle opacity-0"
-                >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center">
-                    <item.icon size={20} className="text-gold" />
+              {differentiators.map((item, i) => {
+                const isSilver = i % 2 === 1
+                return (
+                  <div
+                    key={i}
+                    className="diff-item flex items-start gap-4 py-5 border-b border-border-subtle opacity-0"
+                  >
+                    <div
+                      className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${
+                        isSilver
+                          ? 'bg-silver/10 ring-1 ring-silver/25'
+                          : 'bg-gold/10 ring-1 ring-gold/25'
+                      }`}
+                    >
+                      <item.icon
+                        size={20}
+                        className={isSilver ? 'text-silver-light' : 'text-gold'}
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-ice-white font-semibold text-base mb-1">{item.title}</h4>
+                      <p className="text-slate text-sm leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-ice-white font-semibold text-base mb-1">{item.title}</h4>
-                    <p className="text-slate text-sm leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* CTA */}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Phone, ChevronDown } from 'lucide-react'
@@ -13,16 +13,24 @@ const POSTER_FRAME = '/hero-frame-01.jpg'
 const HEADLINE_TOP = 'YOUR SAFETY'
 const HEADLINE_BOTTOM = 'IS OUR PRIORITY'
 
-const splitChars = (text: string) =>
+const splitChars = (text: string, charStyle?: CSSProperties) =>
   text.split('').map((ch, i) => (
     <span
       key={`${ch}-${i}`}
       className="hero-char inline-block will-change-transform"
-      style={{ opacity: 0 }}
+      style={{ opacity: 0, ...charStyle }}
     >
       {ch === ' ' ? '\u00A0' : ch}
     </span>
   ))
+
+const goldCharStyle: CSSProperties = {
+  backgroundImage:
+    'linear-gradient(180deg, #F0D88A 0%, #D4B76A 50%, #B8945A 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
 
 const grainSvg =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
@@ -64,8 +72,8 @@ export default function Hero() {
       if (cancelled) return
       const player = new YT.Player('hero-yt-player', {
         videoId: YT_VIDEO_ID,
-        width: '100%',
-        height: '100%',
+        width: 1920,
+        height: 1080,
         playerVars: {
           autoplay: 1,
           mute: 1,
@@ -77,12 +85,31 @@ export default function Hero() {
           playsinline: 1,
           disablekb: 1,
           start: LOOP_START,
+          vq: 'hd1080',
+          hd: 1,
         },
         events: {
           onReady: (e: any) => {
             try {
+              const iframe: HTMLIFrameElement | null = e.target.getIframe?.()
+              if (iframe) {
+                iframe.style.position = 'absolute'
+                iframe.style.top = '0'
+                iframe.style.left = '0'
+                iframe.style.width = '100%'
+                iframe.style.height = '100%'
+                iframe.style.border = '0'
+                iframe.style.display = 'block'
+                iframe.style.transform = 'scale(1.18)'
+                iframe.style.transformOrigin = 'center center'
+                iframe.removeAttribute('width')
+                iframe.removeAttribute('height')
+              }
               e.target.mute()
               e.target.seekTo(LOOP_START, true)
+              try {
+                e.target.setPlaybackQuality?.('hd1080')
+              } catch {}
               e.target.playVideo()
             } catch {}
           },
@@ -233,10 +260,13 @@ export default function Hero() {
 
           {/* YouTube iframe – "object-fit: cover" via viewport-based sizing */}
           <div
-            className={`absolute top-1/2 left-1/2 pointer-events-none transition-opacity duration-1000 ${
+            className={`hero-video-wrapper pointer-events-none transition-opacity duration-1000 ${
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
               width: 'max(106vw, calc(106vh * 16 / 9))',
               height: 'max(106vh, calc(106vw * 9 / 16))',
               transform: 'translate(-50%, -50%)',
@@ -249,15 +279,22 @@ export default function Hero() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'linear-gradient(180deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.25) 35%, rgba(10,22,40,0.35) 65%, rgba(10,22,40,0.95) 100%)',
+                'linear-gradient(180deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.35) 35%, rgba(10,22,40,0.4) 65%, rgba(10,22,40,0.9) 100%)',
+            }}
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 55% 45% at center, rgba(10,22,40,0.6) 0%, rgba(10,22,40,0) 75%)',
             }}
           />
           <div
             className="hero-vignette absolute inset-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(ellipse at center, transparent 40%, rgba(10,22,40,0.85) 100%)',
-              opacity: 0.7,
+                'radial-gradient(ellipse 110% 90% at center, transparent 55%, rgba(10,22,40,0.55) 100%)',
+              opacity: 0.6,
             }}
           />
           <div
@@ -294,14 +331,11 @@ export default function Hero() {
             <span
               className="hero-line-bottom block text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em] mt-2 italic"
               style={{
-                backgroundImage:
-                  'linear-gradient(180deg, #D4B76A 0%, #C8A45E 50%, #8a6f34 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                filter:
+                  'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) drop-shadow(0 0 24px rgba(10,22,40,0.5))',
               }}
             >
-              {splitChars(HEADLINE_BOTTOM)}
+              {splitChars(HEADLINE_BOTTOM, goldCharStyle)}
             </span>
           </h1>
 

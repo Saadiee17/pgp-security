@@ -94,10 +94,25 @@ export default function StatsBar() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, i) => (
             <div key={i} className="text-center">
-              <div className="text-gold text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+              <div
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(180deg, rgb(var(--c-silver-light)) 0%, rgb(var(--c-silver)) 35%, rgb(var(--c-gold-light)) 70%, rgb(var(--c-gold)) 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} triggered={triggered} />
               </div>
-              <div className="w-10 h-0.5 bg-gold mx-auto mt-4 mb-3" />
+              <div
+                className="w-10 h-0.5 mx-auto mt-4 mb-3"
+                style={{
+                  background:
+                    'linear-gradient(90deg, rgb(var(--c-silver)) 0%, rgb(var(--c-gold)) 100%)',
+                }}
+              />
               <div className="text-slate text-xs font-semibold tracking-[0.08em] uppercase">
                 {stat.label}
               </div>

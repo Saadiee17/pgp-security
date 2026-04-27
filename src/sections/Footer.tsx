@@ -44,7 +44,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
           {/* Brand */}
           <div>
-            <div className="text-gold text-2xl font-bold mb-1">PGP</div>
+            <img
+              src="./pgp-logo.png"
+              alt="PGP Security — Serving Since 1985"
+              className="h-28 w-auto object-contain mb-3"
+            />
             <div className="text-slate text-[10px] font-semibold tracking-[0.1em] uppercase mb-3">
               PROFESSIONAL GUARD & PATROL
             </div>

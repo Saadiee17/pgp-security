@@ -46,7 +46,7 @@ export default function CustomCursor() {
     const leaveInteractive = () => {
       gsap.to(ring, {
         scale: 1,
-        borderColor: 'rgb(var(--c-silver) / 0.55)',
+        borderColor: 'rgb(var(--c-silver-light) / 0.85)',
         backgroundColor: 'transparent',
         duration: 0.25,
         ease: 'power2.out',
@@ -103,7 +103,8 @@ export default function CustomCursor() {
           width: 32,
           height: 32,
           borderRadius: '9999px',
-          border: '1.5px solid rgb(var(--c-silver) / 0.55)',
+          border: '1.5px solid rgb(var(--c-silver-light) / 0.85)',
+          boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.25)',
           pointerEvents: 'none',
           zIndex: 9999,
           opacity: 0,
@@ -117,14 +118,15 @@ export default function CustomCursor() {
           position: 'fixed',
           top: 0,
           left: 0,
-          width: 6,
-          height: 6,
+          width: 8,
+          height: 8,
           borderRadius: '9999px',
-          background: 'rgb(var(--c-gold))',
+          background: 'rgb(var(--c-gold-light))',
+          boxShadow:
+            '0 0 0 1.5px rgba(255, 255, 255, 0.85), 0 0 8px rgba(0, 0, 0, 0.55)',
           pointerEvents: 'none',
           zIndex: 10000,
           opacity: 0,
-          mixBlendMode: 'difference',
           willChange: 'transform',
         }}
       />

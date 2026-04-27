@@ -24,14 +24,6 @@ const splitChars = (text: string, charStyle?: CSSProperties) =>
     </span>
   ))
 
-const goldCharStyle: CSSProperties = {
-  backgroundImage:
-    'linear-gradient(180deg, #F0D88A 0%, #D4B76A 50%, #B8945A 100%)',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text',
-}
-
 const grainSvg =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
@@ -306,8 +298,8 @@ export default function Hero() {
           />
         </div>
 
-        <div className="letterbox-top absolute top-0 left-0 right-0 bg-black z-30 pointer-events-none" />
-        <div className="letterbox-bottom absolute bottom-0 left-0 right-0 bg-black z-30 pointer-events-none" />
+        <div className="letterbox-top absolute top-0 left-0 right-0 bg-deep-navy z-30 pointer-events-none" />
+        <div className="letterbox-bottom absolute bottom-0 left-0 right-0 bg-deep-navy z-30 pointer-events-none" />
 
         <div
           ref={textGroupRef}
@@ -329,13 +321,14 @@ export default function Hero() {
               {splitChars(HEADLINE_TOP)}
             </span>
             <span
-              className="hero-line-bottom block text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em] mt-2 italic"
+              className="hero-line-bottom block text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold leading-[1.05] tracking-[-0.03em] mt-2 italic pb-2"
               style={{
+                color: '#ECCB7C',
                 filter:
-                  'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) drop-shadow(0 0 24px rgba(10,22,40,0.5))',
+                  'drop-shadow(0 2px 8px rgba(0,0,0,0.65)) drop-shadow(0 0 24px rgba(10,22,40,0.5))',
               }}
             >
-              {splitChars(HEADLINE_BOTTOM, goldCharStyle)}
+              {splitChars(HEADLINE_BOTTOM)}
             </span>
           </h1>
 

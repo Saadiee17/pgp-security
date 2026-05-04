@@ -130,23 +130,6 @@ html.lenis body {
   color: rgb(var(--c-ice-white));
 }
 
-/* Custom cursor — hide native pointer on devices that have a fine pointer */
-@media (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor body,
-  html.has-custom-cursor a,
-  html.has-custom-cursor button,
-  html.has-custom-cursor [role='button'] {
-    cursor: none !important;
-  }
-  html.has-custom-cursor input,
-  html.has-custom-cursor textarea,
-  html.has-custom-cursor select,
-  html.has-custom-cursor [contenteditable='true'] {
-    cursor: text !important;
-  }
-}
-
 /* Force YouTube iframe to fully fill its cover-fit wrapper */
 .hero-video-wrapper {
   position: absolute;

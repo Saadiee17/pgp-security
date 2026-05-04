@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { Facebook, Youtube } from 'lucide-react'
 
 function XIcon({ size = 20, className = '' }: { size?: number; className?: string }) {
@@ -9,29 +10,24 @@ function XIcon({ size = 20, className = '' }: { size?: number; className?: strin
 }
 
 const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'About Us', href: '#why-choose' },
-  { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About Us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Locations', to: '/locations' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Careers', to: '/careers' },
 ]
 
 const serviceLinks = [
-  'Armed Guards',
-  'Unarmed Guards',
-  'Patrol Services',
-  'Alarm Response',
-  'Temporary Security',
+  { label: 'Armed Guards', to: '/services' },
+  { label: 'Unarmed Guards', to: '/services' },
+  { label: 'Patrol Services', to: '/services' },
+  { label: 'Alarm Response', to: '/services' },
+  { label: 'Temporary Security', to: '/services' },
 ]
 
 export default function Footer() {
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <footer
       className="w-full pt-16 sm:pt-20 pb-8 border-t border-border-subtle"
@@ -44,11 +40,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
           {/* Brand */}
           <div>
-            <img
-              src="./pgp-logo.png"
-              alt="PGP Security — Serving Since 1985"
-              className="h-28 w-auto object-contain mb-3"
-            />
+            <Link to="/" className="inline-block">
+              <img
+                src="./pgp-logo.png"
+                alt="PGP Security — Serving Since 1985"
+                className="h-28 w-auto object-contain mb-3 block dark:hidden"
+              />
+              <img
+                src="./pgp-logo-dark.png"
+                alt="PGP Security — Serving Since 1985"
+                className="h-28 w-auto object-contain mb-3 hidden dark:block"
+              />
+            </Link>
             <div className="text-slate text-[10px] font-semibold tracking-[0.1em] uppercase mb-3">
               PROFESSIONAL GUARD & PATROL
             </div>
@@ -68,12 +71,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.label}>
-                  <button
-                    onClick={() => scrollTo(link.href)}
+                  <Link
+                    to={link.to}
                     className="text-slate text-sm hover:text-ice-white transition-colors duration-200"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -86,10 +89,13 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
-                <li key={link}>
-                  <span className="text-slate text-sm hover:text-ice-white transition-colors duration-200 cursor-pointer">
-                    {link}
-                  </span>
+                <li key={link.label}>
+                  <Link
+                    to={link.to}
+                    className="text-slate text-sm hover:text-ice-white transition-colors duration-200"
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -150,9 +156,9 @@ export default function Footer() {
             2025 Professional Guard & Patrol, Inc. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-xs">
-            <a href="#" className="text-slate hover:text-ice-white transition-colors">Privacy Policy</a>
+            <Link to="/contact" className="text-slate hover:text-ice-white transition-colors">Privacy Policy</Link>
             <span className="text-slate/40">|</span>
-            <a href="#" className="text-slate hover:text-ice-white transition-colors">Terms of Service</a>
+            <Link to="/contact" className="text-slate hover:text-ice-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

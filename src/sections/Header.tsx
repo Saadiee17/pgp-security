@@ -1,39 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router'
 import { Menu, X, Phone } from 'lucide-react'
 import gsap from 'gsap'
 import ThemeToggle from '@/components/ThemeToggle'
 
 const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'About', href: '#why-choose' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Locations', to: '/locations' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Careers', to: '/careers' },
 ]
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    if (headerRef.current) {
-      gsap.to(headerRef.current, {
-        y: isScrolled ? 0 : -100,
-        duration: 0.3,
-        ease: 'power2.out',
-      })
-    }
-  }, [isScrolled])
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (mobileMenuRef.current) {
@@ -44,7 +29,8 @@ export default function Header() {
           duration: 0.3,
         })
         const links = mobileMenuRef.current.querySelectorAll('.mobile-link')
-        gsap.fromTo(links, 
+        gsap.fromTo(
+          links,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, stagger: 0.08, duration: 0.4, ease: 'power3.out', delay: 0.1 }
         )
@@ -58,19 +44,16 @@ export default function Header() {
     }
   }, [isMobileOpen])
 
-  const scrollTo = (href: string) => {
+  const goToContact = () => {
     setIsMobileOpen(false)
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-    }
+    navigate('/contact')
   }
 
   return (
     <>
       <header
         ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-50 translate-y-[-100%]"
+        className="fixed top-0 left-0 right-0 z-50"
         style={{
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
@@ -80,24 +63,34 @@ export default function Header() {
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between">
           {/* Logo */}
-          <a href="#hero" className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img
               src="./pgp-logo.png"
               alt="PGP Security — Serving Since 1985"
-              className="h-14 w-auto object-contain"
+              className="h-14 w-auto object-contain block dark:hidden"
             />
-          </a>
+            <img
+              src="./pgp-logo-dark.png"
+              alt="PGP Security — Serving Since 1985"
+              className="h-14 w-auto object-contain hidden dark:block"
+            />
+          </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <button
+              <NavLink
                 key={link.label}
-                onClick={() => scrollTo(link.href)}
-                className="text-slate hover:text-ice-white text-sm font-medium transition-colors duration-200"
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  `text-sm font-medium transition-colors duration-200 ${
+                    isActive ? 'text-gold' : 'text-slate hover:text-ice-white'
+                  }`
+                }
               >
                 {link.label}
-              </button>
+              </NavLink>
             ))}
           </nav>
 
@@ -105,7 +98,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle compact />
             <button
-              onClick={() => scrollTo('#contact')}
+              onClick={goToContact}
               className="border border-border-subtle text-ice-white px-6 py-2.5 rounded-lg text-sm font-medium hover:border-gold hover:text-gold transition-all duration-200"
             >
               Get Quote
@@ -136,7 +129,7 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 opacity-0 pointer-events-none md:hidden flex flex-col items-center justify-center gap-8"
+        className="fixed inset-0 z-40 opacity-0 pointer-events-none md:hidden flex flex-col items-center justify-center gap-6"
         style={{
           background: 'rgb(var(--c-deep-navy) / 0.96)',
           backdropFilter: 'blur(20px)',
@@ -144,17 +137,23 @@ export default function Header() {
         }}
       >
         {navLinks.map((link) => (
-          <button
+          <NavLink
             key={link.label}
-            onClick={() => scrollTo(link.href)}
-            className="mobile-link text-ice-white text-2xl font-semibold hover:text-gold transition-colors"
+            to={link.to}
+            end={link.to === '/'}
+            onClick={() => setIsMobileOpen(false)}
+            className={({ isActive }) =>
+              `mobile-link text-2xl font-semibold transition-colors ${
+                isActive ? 'text-gold' : 'text-ice-white hover:text-gold'
+              }`
+            }
           >
             {link.label}
-          </button>
+          </NavLink>
         ))}
         <div className="mobile-link flex flex-col gap-3 mt-4 w-[200px]">
           <button
-            onClick={() => scrollTo('#contact')}
+            onClick={goToContact}
             className="border border-gold text-gold px-6 py-3 rounded-lg text-base font-medium"
           >
             Get Quote

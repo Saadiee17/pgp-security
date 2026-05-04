@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { MapPin } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -118,6 +119,17 @@ export default function StatsBar() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <div className="flex items-center gap-2 text-gold">
+            <MapPin size={14} />
+            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase">Service Area</span>
+          </div>
+          <span className="hidden sm:inline text-slate/40">·</span>
+          <p className="text-slate text-sm sm:text-base">
+            Serving <span className="text-ice-white font-medium">Houston</span>, <span className="text-ice-white font-medium">Katy</span>, <span className="text-ice-white font-medium">Sugar Land</span>, <span className="text-ice-white font-medium">The Woodlands</span>, and surrounding areas.
+          </p>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router'
 import { Phone, CheckCircle } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -67,20 +68,20 @@ export default function CTABanner() {
 
       <div className="max-w-[800px] mx-auto px-6 text-center relative z-10">
         <h2 className="anim-el text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
-          Ready to Secure<br />Your Property?
+          Don't Wait Until<br />Something Goes Wrong
         </h2>
         <p className="anim-el text-slate text-base sm:text-lg max-w-[600px] mx-auto mb-8 opacity-0">
-          Contact PGP Security today for a free consultation and custom security plan tailored to your needs.
+          Get a free security assessment from PGP today — licensed guards, rapid deployment, and a custom plan built around your property.
         </p>
 
         {/* CTAs */}
         <div className="anim-el flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 opacity-0">
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="bg-gold text-gold-ink px-10 py-4 rounded-lg font-semibold text-base hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
           >
             Get Your Free Quote
-          </a>
+          </Link>
           <a
             href="tel:2814484900"
             className="border border-ice-white/30 text-ice-white px-10 py-4 rounded-lg font-medium text-base hover:border-gold hover:text-gold transition-all duration-200 flex items-center gap-2"

@@ -12,7 +12,7 @@ const serviceOptions = [
   'Patrol Services',
   'Alarm Response',
   'Temporary Security',
-  'Other',
+  'Other / Not Sure',
 ]
 
 // X (Twitter) icon component

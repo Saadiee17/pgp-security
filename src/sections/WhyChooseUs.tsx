@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Link } from 'react-router'
 import { Clock, DollarSign, Users, MapPin, Home } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -199,12 +200,12 @@ export default function WhyChooseUs() {
 
             {/* CTA */}
             <div className="cta-btn mt-8 opacity-0">
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="inline-block bg-gold text-gold-ink px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
               >
                 Get Your Custom Security Plan
-              </a>
+              </Link>
             </div>
           </div>
         </div>

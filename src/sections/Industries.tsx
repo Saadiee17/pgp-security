@@ -89,7 +89,24 @@ export default function Industries() {
       })
     })
 
-    return () => mm.revert()
+    return () => {
+      // Kill any ScrollTriggers we created — pass true so pin-spacers
+      // are unwrapped from the DOM synchronously. Without this, React
+      // tries to unmount our <section> from <main> while it's still
+      // inside the GSAP-injected pin-spacer wrapper, causing
+      // removeChild "node is not a child of this node" crashes on
+      // route change.
+      ScrollTrigger.getAll().forEach((st) => {
+        if (
+          st.trigger === sectionRef.current ||
+          st.trigger === trackRef.current ||
+          st.trigger === headerRef.current
+        ) {
+          st.kill(true)
+        }
+      })
+      mm.revert()
+    }
   }, [])
 
   return (

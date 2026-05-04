@@ -74,6 +74,7 @@ export default function Hero() {
   const stageRef = useRef<HTMLDivElement>(null)
   const textGroupRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<any>(null)
+  const ytHostRef = useRef<HTMLDivElement>(null)
   const [videoReady, setVideoReady] = useState(false)
 
   useEffect(() => {
@@ -81,8 +82,18 @@ export default function Hero() {
     let pollId: number | null = null
 
     loadYouTubeAPI().then((YT) => {
-      if (cancelled) return
-      const player = new YT.Player('hero-yt-player', {
+      if (cancelled || !ytHostRef.current) return
+
+      // Mount YT into a fresh child div we create — never let YT replace
+      // a React-owned node directly (causes removeChild on unmount).
+      const mountId = `hero-yt-player-${Math.random().toString(36).slice(2, 9)}`
+      const mount = document.createElement('div')
+      mount.id = mountId
+      mount.style.width = '100%'
+      mount.style.height = '100%'
+      ytHostRef.current.appendChild(mount)
+
+      const player = new YT.Player(mountId, {
         videoId: YT_VIDEO_ID,
         width: 1920,
         height: 1080,
@@ -99,6 +110,7 @@ export default function Hero() {
           start: LOOP_START,
           vq: 'hd1080',
           hd: 1,
+          origin: window.location.origin,
         },
         events: {
           onReady: (e: any) => {
@@ -156,6 +168,10 @@ export default function Hero() {
       try {
         playerRef.current?.destroy?.()
       } catch {}
+      playerRef.current = null
+      // Clear anything YT left behind so React never tries to remove a
+      // node it doesn't own.
+      if (ytHostRef.current) ytHostRef.current.innerHTML = ''
     }
   }, [])
 
@@ -284,7 +300,7 @@ export default function Hero() {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <div id="hero-yt-player" className="w-full h-full" />
+            <div ref={ytHostRef} className="w-full h-full" />
           </div>
 
           <div

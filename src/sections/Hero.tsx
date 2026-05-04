@@ -357,7 +357,7 @@ export default function Hero() {
               {splitWords(HEADLINE_TOP)}
             </span>
             <span
-              className="hero-line-bottom block text-[clamp(2rem,6.2vw,4.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] mt-2 italic pb-2"
+              className="hero-line-bottom block text-[clamp(2rem,6.2vw,4.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] mt-2 italic pb-2 pr-2 sm:pr-3"
               style={{
                 color: '#ECCB7C',
                 filter:

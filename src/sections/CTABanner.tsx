@@ -71,7 +71,7 @@ export default function CTABanner() {
           Don't Wait Until<br />Something Goes Wrong
         </h2>
         <p className="anim-el text-slate text-base sm:text-lg max-w-[600px] mx-auto mb-8 opacity-0">
-          Get a free security assessment from PGP today — licensed guards, rapid deployment, and a custom plan built around your property.
+          Get a free security assessment from PGP today. Licensed guards, rapid deployment, and a custom plan built around your property.
         </p>
 
         {/* CTAs */}

@@ -20,7 +20,7 @@ const benefits = [
   {
     icon: TrendingUp,
     title: 'Advancement Paths',
-    description: 'Start on patrol and grow into supervisory or dispatch roles. Promotions are based on performance and reliability — not tenure politics.',
+    description: 'Start on patrol and grow into supervisory or dispatch roles. Promotions are based on performance and reliability, not tenure politics.',
   },
   {
     icon: Users,
@@ -30,7 +30,7 @@ const benefits = [
 ]
 
 const requirements = [
-  'Valid Texas Level II, III, or IV security license preferred — or willingness to obtain',
+  'Valid Texas Level II, III, or IV security license preferred, or willingness to obtain',
   'Must be 18 years of age or older',
   'Clean criminal background (required for state licensing)',
   'Reliable personal transportation',
@@ -51,9 +51,9 @@ const positionOptions = [
 
 const experienceOptions = [
   { label: 'Years of Experience', value: '' },
-  { label: '0 – 1 year', value: '0-1' },
-  { label: '1 – 3 years', value: '1-3' },
-  { label: '3 – 5 years', value: '3-5' },
+  { label: '0 to 1 year', value: '0-1' },
+  { label: '1 to 3 years', value: '1-3' },
+  { label: '3 to 5 years', value: '3-5' },
   { label: '5+ years', value: '5+' },
 ]
 
@@ -191,7 +191,7 @@ export default function Careers() {
             </h1>
             <p className="hero-el text-slate text-lg sm:text-xl leading-relaxed max-w-[560px] opacity-0">
               We're always looking for disciplined, professional individuals who take pride in
-              keeping people safe. If you want to build a career — not just hold a job — PGP
+              keeping people safe. If you want to build a career and not just hold a job, PGP
               is where that starts.
             </p>
           </div>
@@ -285,7 +285,7 @@ export default function Careers() {
                 What We Look For
               </h2>
               <p className="anim-el text-slate text-base leading-relaxed mb-8 opacity-0">
-                PGP holds its officers to a high standard — because our clients depend on it.
+                PGP holds its officers to a high standard, because our clients depend on it.
                 All candidates must meet the following baseline criteria:
               </p>
               <ul className="anim-el opacity-0 space-y-3">
@@ -404,7 +404,7 @@ export default function Careers() {
                 </div>
 
                 <textarea
-                  placeholder="Tell us about yourself — experience, why you want to join PGP, availability..."
+                  placeholder="Tell us about yourself: experience, why you want to join PGP, availability..."
                   rows={4}
                   className={inputClass + ' resize-none'}
                   value={formData.message}
@@ -431,7 +431,7 @@ export default function Careers() {
                   <h3 className="text-ice-white text-base font-semibold mb-2">Before You Apply</h3>
                   <p className="text-slate text-sm leading-relaxed">
                     Texas security officers must hold a valid DPS license. If you don't have one
-                    yet, that's okay — we can point you toward the right training resources. Include
+                    yet, that's okay. We can point you toward the right training resources. Include
                     your current license status in the form.
                   </p>
                 </div>

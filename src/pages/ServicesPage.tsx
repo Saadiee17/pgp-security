@@ -125,7 +125,7 @@ export default function ServicesPage() {
                 Not Sure What You Need?
               </h3>
               <p className="text-slate text-sm sm:text-base leading-relaxed max-w-[540px]">
-                Every property is different. Our security consultants will assess your site, identify vulnerabilities, and build a custom solution — at no charge.
+                Every property is different. Our security consultants will assess your site, identify vulnerabilities, and build a custom solution, at no charge.
               </p>
             </div>
             <Link

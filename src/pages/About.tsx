@@ -11,7 +11,7 @@ const values = [
   {
     icon: HandshakeIcon,
     title: 'Integrity',
-    description: 'We operate with full transparency — honest assessments, honest pricing, and honest communication at every step.',
+    description: 'We operate with full transparency, with honest assessments, honest pricing, and honest communication at every step.',
   },
   {
     icon: Eye,
@@ -21,7 +21,7 @@ const values = [
   {
     icon: Shield,
     title: 'Accountability',
-    description: 'Every shift is logged, every incident documented. You always know what happened and when — no gaps, no excuses.',
+    description: 'Every shift is logged, every incident documented. You always know what happened and when, with no gaps and no excuses.',
   },
   {
     icon: Users,
@@ -156,7 +156,7 @@ export default function About() {
             </h1>
             <p className="hero-el text-slate text-lg sm:text-xl leading-relaxed max-w-[580px] opacity-0">
               Since 1985, Professional Guard & Patrol Inc. has been Houston's trusted partner in
-              commercial security — built on discipline, accountability, and unwavering commitment
+              commercial security, built on discipline, accountability, and unwavering commitment
               to the communities we protect.
             </p>
             <div className="hero-el mt-8 flex items-center gap-3 opacity-0">
@@ -189,8 +189,8 @@ export default function About() {
                 PGP Security was founded in Houston in 1985 with a single mission: provide
                 reliable, professional security that businesses could actually count on. In a
                 market crowded with cut-rate services and inconsistent guards, our founder saw
-                an opportunity to do things differently — hiring only vetted officers, investing
-                in continuous training, and building client relationships that last decades, not months.
+                an opportunity to do things differently. He hired only vetted officers, invested
+                in continuous training, and built client relationships that last decades, not months.
               </p>
               <p className="anim-el text-slate text-base leading-relaxed mb-5 opacity-0">
                 Forty years later, PGP remains independently owned and Houston-headquartered.
@@ -199,7 +199,7 @@ export default function About() {
               </p>
               <p className="anim-el text-slate text-base leading-relaxed opacity-0">
                 Our officers are licensed by the Texas Department of Public Safety under
-                License No. B-19349 — one of the oldest active private security licenses in the state.
+                License No. B-19349, one of the oldest active private security licenses in the state.
                 That longevity reflects who we are: a company that earns trust, then keeps it.
               </p>
             </div>
@@ -211,7 +211,7 @@ export default function About() {
                 { year: '1992', label: 'Armed Division Launched', detail: 'Expanded into armed guard services for high-value commercial sites.' },
                 { year: '2001', label: 'Statewide Licensing', detail: 'Received full Texas DPS licensure enabling operations across the state.' },
                 { year: '2010', label: 'Patrol Fleet Expanded', detail: 'Marked patrol vehicles added for large-campus and industrial clients.' },
-                { year: '2025', label: '40 Years of Service', detail: 'Still Houston-owned, still Houston-focused — and stronger than ever.' },
+                { year: '2025', label: '40 Years of Service', detail: 'Still Houston-owned, still Houston-focused, and stronger than ever.' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-5 group">
                   <div className="flex flex-col items-center">
@@ -249,7 +249,7 @@ export default function About() {
             </h2>
             <p className="anim-header text-slate text-base sm:text-lg max-w-[540px] mx-auto opacity-0">
               Our mission is to provide professional, dependable security services that protect
-              people, property, and peace of mind — every hour of every day.
+              people, property, and peace of mind, every hour of every day.
             </p>
           </div>
 
@@ -319,7 +319,7 @@ export default function About() {
               <div className="absolute bottom-4 left-4 bg-midnight/90 backdrop-blur-sm border border-border-subtle rounded-xl px-4 py-3">
                 <div className="flex items-center gap-2">
                   <MapPin size={14} className="text-gold flex-shrink-0" />
-                  <span className="text-ice-white text-xs font-semibold">Houston, Texas — Since 1985</span>
+                  <span className="text-ice-white text-xs font-semibold">Houston, Texas · Since 1985</span>
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@ export default function About() {
               <p className="anim-el text-slate text-base leading-relaxed mb-5 opacity-0">
                 Every PGP officer is background-checked, licensed by the Texas DPS, and trained
                 to our internal standards before their first assignment. We don't cut corners on
-                personnel — because the quality of your security is only as high as the quality
+                personnel, because the quality of your security is only as high as the quality
                 of the people wearing the uniform.
               </p>
               <p className="anim-el text-slate text-base leading-relaxed mb-8 opacity-0">

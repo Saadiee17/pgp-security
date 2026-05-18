@@ -11,7 +11,7 @@ const industries = [
     icon: HardHat,
     name: 'Construction',
     challenge:
-      'Active job sites are prime targets after hours. Copper theft, tool vandalism, and unauthorized equipment access can cost hundreds of thousands in losses and delays — yet most contractors rely on fencing alone.',
+      'Active job sites are prime targets after hours. Copper theft, tool vandalism, and unauthorized equipment access can cost hundreds of thousands in losses and delays, yet most contractors rely on fencing alone.',
     solutions: [
       'Armed and unarmed on-site guards during off-hours',
       'Mobile patrol routes covering the full perimeter',

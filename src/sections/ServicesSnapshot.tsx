@@ -79,7 +79,7 @@ export default function ServicesSnapshot() {
             Core Security Services
           </h2>
           <p className="anim-header text-slate text-base sm:text-lg max-w-[540px] mx-auto opacity-0">
-            From boots on the ground to rapid alarm response — built for Houston's businesses.
+            From boots on the ground to rapid alarm response, all built for Houston's businesses.
           </p>
         </div>
 

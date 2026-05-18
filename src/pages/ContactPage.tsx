@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Phone, Clock, MapPin, Mail } from 'lucide-react'
+import { Phone, Clock, MapPin, Mail, UserRound } from 'lucide-react'
 import Contact from '@/sections/Contact'
 import CTABanner from '@/sections/CTABanner'
+import { branches } from '@/data/cities'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -95,6 +96,71 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Branch directory */}
+      <section className="w-full py-20 sm:py-24 bg-deep-navy border-b border-border-subtle">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="max-w-[720px] mb-12">
+            <span className="block text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-4">
+              OUR OFFICES
+            </span>
+            <h2 className="text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4">
+              Three branches across Greater Houston
+            </h2>
+            <p className="text-slate text-base sm:text-lg leading-relaxed">
+              Reach the office nearest your location for direct support, or call our 24/7 dispatcher for after-hours response.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {branches.map((b) => (
+              <div
+                key={b.slug}
+                className="flex flex-col bg-midnight border border-border-subtle rounded-2xl p-6"
+              >
+                <span className="text-gold text-[11px] font-semibold tracking-[0.12em] uppercase mb-3">
+                  {b.region}
+                </span>
+                <h3 className="text-ice-white text-xl font-semibold mb-4">{b.name}</h3>
+
+                <div className="flex items-start gap-3 mb-4">
+                  <MapPin size={16} className="text-gold flex-shrink-0 mt-1" />
+                  <p className="text-slate text-sm leading-relaxed">{b.address}</p>
+                </div>
+
+                <div className="flex items-start gap-3 mb-4">
+                  <UserRound size={16} className="text-gold flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="text-ice-white text-sm font-semibold leading-tight">
+                      {b.operationsManager.name}
+                    </p>
+                    <p className="text-slate text-xs mt-0.5">{b.operationsManager.title}</p>
+                  </div>
+                </div>
+
+                <div className="mt-auto pt-4 border-t border-border-subtle/60 space-y-2">
+                  <a
+                    href={b.phoneHref}
+                    className="flex items-center gap-2 text-ice-white text-sm font-semibold hover:text-gold transition-colors"
+                  >
+                    <Phone size={14} className="text-gold flex-shrink-0" />
+                    {b.phone}
+                  </a>
+                  {b.dispatcherPhone && b.dispatcherHref && (
+                    <a
+                      href={b.dispatcherHref}
+                      className="flex items-center gap-2 text-slate text-xs hover:text-gold transition-colors"
+                    >
+                      <Phone size={12} className="text-gold/70 flex-shrink-0" />
+                      {b.dispatcherPhone} (24/7 dispatcher)
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

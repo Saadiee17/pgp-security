@@ -24,7 +24,7 @@ const solutions = [
   {
     icon: Zap,
     title: 'Fast Deployment',
-    description: 'Emergency coverage dispatched the same day. We scale up or down on short notice — no delays.',
+    description: 'Emergency coverage dispatched the same day. We scale up or down on short notice, with no delays.',
   },
 ]
 
@@ -82,7 +82,7 @@ export default function SolutionSection() {
             Security You Can<br />Actually Measure
           </h2>
           <p className="anim-header text-slate text-base sm:text-lg max-w-[560px] mx-auto opacity-0">
-            PGP delivers accountability at every level — from real-time tracking to fully documented incidents.
+            PGP delivers accountability at every level, from real-time tracking to fully documented incidents.
           </p>
         </div>
 

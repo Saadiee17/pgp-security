@@ -56,7 +56,7 @@ export default function LocationsSection() {
             Serving Greater Houston
           </h2>
           <p className="anim-el text-slate text-base sm:text-lg max-w-[540px] mx-auto opacity-0">
-            PGP Security covers Houston and the surrounding metro — fast response anywhere in the region.
+            PGP Security covers Houston and the surrounding metro, with fast response anywhere in the region.
           </p>
         </div>
 

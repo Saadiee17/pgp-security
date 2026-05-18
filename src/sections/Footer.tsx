@@ -43,12 +43,12 @@ export default function Footer() {
             <Link to="/" className="inline-block">
               <img
                 src="./pgp-logo.png"
-                alt="PGP Security — Serving Since 1985"
+                alt="PGP Security, Serving Since 1985"
                 className="h-28 w-auto object-contain mb-3 block dark:hidden"
               />
               <img
                 src="./pgp-logo-dark.png"
-                alt="PGP Security — Serving Since 1985"
+                alt="PGP Security, Serving Since 1985"
                 className="h-28 w-auto object-contain mb-3 hidden dark:block"
               />
             </Link>

@@ -14,7 +14,7 @@ const problems = [
   {
     icon: FileX,
     title: 'No Reporting',
-    description: 'Incidents go undocumented. You find out about problems days later — or never.',
+    description: 'Incidents go undocumented. You find out about problems days later, or never.',
   },
   {
     icon: Clock,
@@ -79,10 +79,10 @@ export default function ProblemSection() {
             THE PROBLEM
           </span>
           <h2 className="anim-header text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
-            Most Security Companies<br />Show Up — But Don't Deliver
+            Most Security Companies<br />Show Up, But Don't Deliver
           </h2>
           <p className="anim-header text-slate text-base sm:text-lg max-w-[560px] mx-auto opacity-0">
-            Hiring the wrong security firm doesn't just waste money — it leaves your people and property exposed.
+            Hiring the wrong security firm doesn't just waste money. It leaves your people and property exposed.
           </p>
         </div>
 

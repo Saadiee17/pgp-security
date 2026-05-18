@@ -2,15 +2,16 @@ import { useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowLeft, ArrowRight, MapPin, Clock, Phone, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, MapPin, Clock, Phone, ShieldCheck, UserRound } from 'lucide-react'
 import CTABanner from '@/sections/CTABanner'
-import { getCity } from '@/data/cities'
+import { getCity, getBranch } from '@/data/cities'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function BranchPage() {
   const { city: slug } = useParams<{ city: string }>()
   const city = slug ? getCity(slug) : undefined
+  const branch = city ? getBranch(city.branch) : undefined
 
   const heroRef = useRef<HTMLDivElement>(null)
   const detailsRef = useRef<HTMLDivElement>(null)
@@ -43,13 +44,13 @@ export default function BranchPage() {
     return (
       <section className="pt-[140px] pb-32 min-h-[80vh] flex flex-col items-center justify-center text-center px-6 bg-deep-navy">
         <div className="text-gold text-xs font-mono tracking-[0.2em] uppercase mb-4">
-          404 — Location Not Found
+          404 · Location Not Found
         </div>
         <h1 className="text-ice-white text-3xl sm:text-4xl font-semibold mb-4">
           We don&apos;t have a branch page for that city
         </h1>
         <p className="text-slate text-base max-w-xl mb-8">
-          The location you&apos;re looking for isn&apos;t in our directory yet — but we may still cover it.
+          The location you&apos;re looking for isn&apos;t in our directory yet, but we may still cover it.
           Browse all locations or get in touch with PGP directly.
         </p>
         <div className="flex flex-col sm:flex-row gap-3">
@@ -145,20 +146,41 @@ export default function BranchPage() {
                   </span>
                 </div>
                 <p className="text-ice-white text-sm">{city.responseTime}</p>
-                <p className="text-slate text-xs mt-1">Typical dispatch from Houston HQ</p>
+                {branch && (
+                  <p className="text-slate text-xs mt-1">Typical dispatch from {branch.name}</p>
+                )}
               </div>
 
-              <a
-                href="tel:2814484900"
-                className="anim-el opacity-0 group flex items-center gap-3 bg-gold text-gold-ink rounded-2xl p-6 font-semibold hover:bg-gold-light transition-colors duration-200"
-              >
-                <Phone size={18} className="flex-shrink-0" />
-                <div className="flex-1">
-                  <div className="text-sm">Call PGP Dispatch</div>
-                  <div className="text-base font-bold">(281) 448-4900</div>
+              {branch && (
+                <div className="anim-el opacity-0 bg-midnight border border-border-subtle rounded-2xl p-6">
+                  <div className="flex items-start gap-3 mb-3">
+                    <UserRound size={18} className="text-gold flex-shrink-0 mt-0.5" />
+                    <span className="text-xs font-semibold tracking-[0.1em] uppercase text-gold">
+                      Operations Manager
+                    </span>
+                  </div>
+                  <p className="text-ice-white text-base font-semibold leading-tight">
+                    {branch.operationsManager.name}
+                  </p>
+                  <p className="text-slate text-sm mt-1">
+                    {branch.operationsManager.title}, {branch.name}
+                  </p>
                 </div>
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-              </a>
+              )}
+
+              {branch && (
+                <a
+                  href={branch.phoneHref}
+                  className="anim-el opacity-0 group flex items-center gap-3 bg-gold text-gold-ink rounded-2xl p-6 font-semibold hover:bg-gold-light transition-colors duration-200"
+                >
+                  <Phone size={18} className="flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="text-sm">Call {branch.name}</div>
+                    <div className="text-base font-bold">{branch.phone}</div>
+                  </div>
+                  <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+                </a>
+              )}
             </div>
           </div>
 

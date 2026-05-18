@@ -81,7 +81,7 @@ export default function Locations() {
           </h1>
           <p className="anim-el opacity-0 text-slate text-base sm:text-lg max-w-[600px] mx-auto leading-relaxed">
             PGP Security provides professional guard and patrol services across the Greater Houston
-            metro — from downtown to the outer suburbs, with fast response times throughout the region.
+            metro, from downtown to the outer suburbs, with fast response times throughout the region.
           </p>
         </div>
       </section>

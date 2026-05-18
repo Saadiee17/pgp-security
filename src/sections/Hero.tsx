@@ -12,7 +12,7 @@ const LOOP_END = 55
 const POSTER_FRAME = '/hero-frame-01.jpg'
 
 const HEADLINE_TOP = 'SECURITY YOU CAN SEE,'
-const HEADLINE_BOTTOM = 'TRACK, AND TRUST — 24/7'
+const HEADLINE_BOTTOM = 'TRACK, AND TRUST. 24/7'
 
 const splitWords = (text: string, charStyle?: CSSProperties) => {
   const words = text.split(' ')

@@ -115,7 +115,7 @@ export default function WhyChooseUs() {
           <div ref={imageRef} className="relative opacity-0">
             <div className="rounded-2xl overflow-hidden">
               <img
-                src="/about-team.jpg"
+                src="/images/20260512_111559.jpg"
                 alt="PGP Security Team"
                 className="w-full h-auto object-cover"
               />

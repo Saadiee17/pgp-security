@@ -311,7 +311,7 @@ export default function About() {
             {/* Image */}
             <div className="anim-el opacity-0 relative rounded-2xl overflow-hidden border border-border-subtle">
               <img
-                src="/about-team.jpg"
+                src="/images/20260512_111559.jpg"
                 alt="PGP Security team and operations"
                 className="w-full h-[380px] lg:h-[460px] object-cover"
               />

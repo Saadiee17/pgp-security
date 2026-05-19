@@ -10,31 +10,31 @@ const services = [
     icon: Shield,
     title: 'Armed Guards',
     description: 'Licensed armed security officers for high-risk environments. Enhanced protection for corporate offices, events, and industrial sites.',
-    image: '/service-armed-guards.jpg',
+    image: '/images/20260512_111342.jpg',
   },
   {
     icon: Eye,
     title: 'Unarmed Guards',
     description: 'Professional, approachable security for environments where visible presence matters. Ideal for offices, schools, and healthcare.',
-    image: '/service-unarmed-guards.jpg',
+    image: '/images/20260512_113740.jpg',
   },
   {
     icon: Car,
     title: 'Patrol Services',
     description: 'Mobile patrol in marked vehicles for large areas, neighborhoods, and commercial spaces. Random and scheduled routes.',
-    image: '/service-patrol.jpg',
+    image: '/images/20260512_120829.jpg',
   },
   {
     icon: Bell,
     title: 'Alarm Response',
     description: '24/7 alarm monitoring with rapid dispatch. When your system triggers, our team responds immediately.',
-    image: '/service-alarm-response.jpg',
+    image: '/images/20260512_110019.jpg',
   },
   {
     icon: Calendar,
     title: 'Temporary Security',
     description: 'Flexible security for events, short-term projects, and emergencies. Deployed swiftly from one day to several months.',
-    image: '/service-temporary.jpg',
+    image: '/images/20260512_171453.jpg',
   },
 ]
 
@@ -132,7 +132,7 @@ export default function Services() {
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-midnight to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight/60 via-midnight/10 to-transparent" />
               </div>
 
               {/* Content */}

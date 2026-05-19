@@ -6,9 +6,7 @@ import { Phone, ChevronDown } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const YT_VIDEO_ID = '3P98v05ZzXE'
-const LOOP_START = 38
-const LOOP_END = 55
+const HERO_VIDEO_SRC = '/pgp-home-video.mp4'
 const POSTER_FRAME = '/hero-frame-01.jpg'
 
 const HEADLINE_TOP = 'SECURITY YOU CAN SEE,'
@@ -47,131 +45,24 @@ const splitWords = (text: string, charStyle?: CSSProperties) => {
 const grainSvg =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"
 
-let ytApiPromise: Promise<any> | null = null
-const loadYouTubeAPI = (): Promise<any> => {
-  if (ytApiPromise) return ytApiPromise
-  ytApiPromise = new Promise((resolve) => {
-    const w = window as any
-    if (w.YT && w.YT.Player) {
-      resolve(w.YT)
-      return
-    }
-    const prev = w.onYouTubeIframeAPIReady
-    w.onYouTubeIframeAPIReady = () => {
-      prev && prev()
-      resolve(w.YT)
-    }
-    const s = document.createElement('script')
-    s.src = 'https://www.youtube.com/iframe_api'
-    s.async = true
-    document.head.appendChild(s)
-  })
-  return ytApiPromise
-}
-
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const textGroupRef = useRef<HTMLDivElement>(null)
-  const playerRef = useRef<any>(null)
-  const ytHostRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
 
   useEffect(() => {
-    let cancelled = false
-    let pollId: number | null = null
-
-    loadYouTubeAPI().then((YT) => {
-      if (cancelled || !ytHostRef.current) return
-
-      // Mount YT into a fresh child div we create — never let YT replace
-      // a React-owned node directly (causes removeChild on unmount).
-      const mountId = `hero-yt-player-${Math.random().toString(36).slice(2, 9)}`
-      const mount = document.createElement('div')
-      mount.id = mountId
-      mount.style.width = '100%'
-      mount.style.height = '100%'
-      ytHostRef.current.appendChild(mount)
-
-      const player = new YT.Player(mountId, {
-        videoId: YT_VIDEO_ID,
-        width: 1920,
-        height: 1080,
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-          iv_load_policy: 3,
-          fs: 0,
-          playsinline: 1,
-          disablekb: 1,
-          start: LOOP_START,
-          vq: 'hd1080',
-          hd: 1,
-          origin: window.location.origin,
-        },
-        events: {
-          onReady: (e: any) => {
-            try {
-              const iframe: HTMLIFrameElement | null = e.target.getIframe?.()
-              if (iframe) {
-                iframe.style.position = 'absolute'
-                iframe.style.top = '0'
-                iframe.style.left = '0'
-                iframe.style.width = '100%'
-                iframe.style.height = '100%'
-                iframe.style.border = '0'
-                iframe.style.display = 'block'
-                iframe.style.transform = 'scale(1.18)'
-                iframe.style.transformOrigin = 'center center'
-                iframe.removeAttribute('width')
-                iframe.removeAttribute('height')
-              }
-              e.target.mute()
-              e.target.seekTo(LOOP_START, true)
-              try {
-                e.target.setPlaybackQuality?.('hd1080')
-              } catch {}
-              e.target.playVideo()
-            } catch {}
-          },
-          onStateChange: (e: any) => {
-            if (e.data === YT.PlayerState.PLAYING) setVideoReady(true)
-            if (e.data === YT.PlayerState.ENDED) {
-              try {
-                e.target.seekTo(LOOP_START, true)
-                e.target.playVideo()
-              } catch {}
-            }
-          },
-        },
-      })
-      playerRef.current = player
-
-      pollId = window.setInterval(() => {
-        const p = playerRef.current
-        if (!p || typeof p.getCurrentTime !== 'function') return
-        try {
-          const t = p.getCurrentTime()
-          if (t >= LOOP_END - 0.2 || t < LOOP_START - 0.5) {
-            p.seekTo(LOOP_START, true)
-          }
-        } catch {}
-      }, 250)
-    })
-
+    const v = videoRef.current
+    if (!v) return
+    const onPlaying = () => setVideoReady(true)
+    v.addEventListener('playing', onPlaying)
+    const playPromise = v.play()
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {})
+    }
     return () => {
-      cancelled = true
-      if (pollId) clearInterval(pollId)
-      try {
-        playerRef.current?.destroy?.()
-      } catch {}
-      playerRef.current = null
-      // Clear anything YT left behind so React never tries to remove a
-      // node it doesn't own.
-      if (ytHostRef.current) ytHostRef.current.innerHTML = ''
+      v.removeEventListener('playing', onPlaying)
     }
   }, [])
 
@@ -286,7 +177,7 @@ export default function Hero() {
             }`}
           />
 
-          {/* YouTube iframe – "object-fit: cover" via viewport-based sizing */}
+          {/* Background video – "object-fit: cover" via viewport-based sizing */}
           <div
             className={`hero-video-wrapper pointer-events-none transition-opacity duration-1000 ${
               videoReady ? 'opacity-100' : 'opacity-0'
@@ -300,7 +191,17 @@ export default function Hero() {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <div ref={ytHostRef} className="w-full h-full" />
+            <video
+              ref={videoRef}
+              src={HERO_VIDEO_SRC}
+              poster={POSTER_FRAME}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover block"
+            />
           </div>
 
           <div

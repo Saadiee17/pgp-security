@@ -15,7 +15,7 @@ const industries = [
   {
     name: 'Commercial',
     description: 'Premises protection, access control, and surveillance for offices, retail, and business parks.',
-    image: '/industry-corporate.jpg',
+    image: '/images/20260512_113621.jpg',
     icon: Building2,
   },
   {
@@ -33,7 +33,7 @@ const industries = [
   {
     name: 'Events',
     description: 'Crowd control, access management, and emergency response for concerts, conferences, and gatherings.',
-    image: '/industry-event.jpg',
+    image: '/images/20260512_150918.jpg',
     icon: CalendarDays,
   },
 ]

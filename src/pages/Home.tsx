@@ -1,5 +1,6 @@
 import Hero from '@/sections/Hero'
 import StatsBar from '@/sections/StatsBar'
+import EmergencyCoverage from '@/sections/EmergencyCoverage'
 import ProblemSection from '@/sections/ProblemSection'
 import SolutionSection from '@/sections/SolutionSection'
 import ServicesSnapshot from '@/sections/ServicesSnapshot'
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <Hero />
       <StatsBar />
+      <EmergencyCoverage />
       <ProblemSection />
       <SolutionSection />
       <ServicesSnapshot />

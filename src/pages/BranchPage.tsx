@@ -156,7 +156,7 @@ export default function BranchPage() {
                   <div className="flex items-start gap-3 mb-3">
                     <UserRound size={18} className="text-gold flex-shrink-0 mt-0.5" />
                     <span className="text-xs font-semibold tracking-[0.1em] uppercase text-gold">
-                      Operations Manager
+                      {branch.operationsManager.title}
                     </span>
                   </div>
                   <p className="text-ice-white text-base font-semibold leading-tight">

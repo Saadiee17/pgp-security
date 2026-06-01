@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Link } from 'react-router'
 import { Phone, CheckCircle } from 'lucide-react'
+import { useAssessment } from '@/components/AssessmentModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,6 +15,7 @@ const trustPoints = [
 export default function CTABanner() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
+  const { open: openAssessment } = useAssessment()
 
   useEffect(() => {
     if (!sectionRef.current) return
@@ -76,12 +77,13 @@ export default function CTABanner() {
 
         {/* CTAs */}
         <div className="anim-el flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 opacity-0">
-          <Link
-            to="/contact"
+          <button
+            type="button"
+            onClick={() => openAssessment()}
             className="bg-gold text-gold-ink px-10 py-4 rounded-lg font-semibold text-base hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
           >
-            Get Your Free Quote
-          </Link>
+            Get Your Free Assessment
+          </button>
           <a
             href="tel:2814484900"
             className="border border-ice-white/30 text-ice-white px-10 py-4 rounded-lg font-medium text-base hover:border-gold hover:text-gold transition-all duration-200 flex items-center gap-2"

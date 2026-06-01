@@ -81,6 +81,7 @@ export default function Careers() {
   const requirementsRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
 
+  const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState<FormState>({
     name: '',
     email: '',
@@ -153,7 +154,8 @@ export default function Careers() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Career application submitted:', formData)
+    // In a real app, send the application to the backend here.
+    setSubmitted(true)
   }
 
   const set = (field: keyof FormState) =>
@@ -170,20 +172,22 @@ export default function Careers() {
       {/* ── Hero ── */}
       <section
         ref={heroRef}
-        className="w-full pt-[140px] pb-20 lg:pb-28 bg-deep-navy relative overflow-hidden"
+        className="w-full pt-[150px] pb-20 lg:pb-28 relative overflow-hidden"
       >
+        {/* Background image + scrim */}
+        <div className="absolute inset-0">
+          <img src="/career1.jpg" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
+        </div>
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(200,164,94,0.07) 0%, transparent 65%)' }}
-        />
-        <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(200,164,94,0.4), transparent)' }}
         />
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="max-w-[680px]">
-            <span className="hero-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+            <span className="hero-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
               CAREERS
             </span>
             <h1 className="hero-el text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] mb-6 opacity-0">
@@ -209,7 +213,7 @@ export default function Careers() {
         />
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-12">
-            <span className="anim-header block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+            <span className="anim-header block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
               WHY WORK WITH US
             </span>
             <h2 className="anim-header text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
@@ -245,7 +249,7 @@ export default function Careers() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Open Roles */}
             <div>
-              <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+              <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
                 OPEN ROLES
               </span>
               <h2 className="anim-el text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
@@ -278,7 +282,7 @@ export default function Careers() {
 
             {/* Requirements */}
             <div>
-              <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+              <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
                 REQUIREMENTS
               </span>
               <h2 className="anim-el text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
@@ -311,7 +315,7 @@ export default function Careers() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Form */}
             <div ref={formRef} className="lg:col-span-3">
-              <span className="form-field block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+              <span className="form-field block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
                 APPLY NOW
               </span>
               <h2 className="form-field text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
@@ -322,6 +326,28 @@ export default function Careers() {
                 within 2 business days.
               </p>
 
+              {submitted ? (
+                <div className="bg-deep-navy border border-gold/30 rounded-2xl p-8 sm:p-10 flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-5">
+                    <CheckCircle size={34} className="text-gold" />
+                  </div>
+                  <h3 className="text-ice-white text-2xl font-semibold mb-2">Application Received</h3>
+                  <p className="text-slate text-sm sm:text-base max-w-[420px]">
+                    Thank you{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}! We've received your
+                    application and our team will review it and reach out within 2 business days.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false)
+                      setFormData({ name: '', email: '', phone: '', position: '', experience: '', licenseStatus: '', resume: null, message: '' })
+                    }}
+                    className="mt-7 border border-border-subtle text-ice-white px-7 py-3 rounded-lg font-medium text-sm hover:border-gold hover:text-gold transition-all duration-200"
+                  >
+                    Submit Another Application
+                  </button>
+                </div>
+              ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
@@ -418,6 +444,7 @@ export default function Careers() {
                   Submit Application
                 </button>
               </form>
+              )}
 
               <p className="form-field text-slate text-xs mt-4 opacity-0">
                 Applications are reviewed on a rolling basis. No recruitment agencies, please.

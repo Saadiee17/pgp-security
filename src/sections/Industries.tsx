@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { HardHat, Building2, Home, Factory, CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -42,16 +43,18 @@ export default function Industries() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(true)
 
-  const loopedIndustries = [...industries, ...industries, ...industries]
-
-  const measureOneSet = () => {
+  // Keep the arrow buttons in sync with how far the strip has been scrolled.
+  // Once the last card is reached the "next" button disables; at the start the
+  // "prev" button disables. No looping.
+  const updateArrows = () => {
     const track = trackRef.current
-    if (!track) return 0
-    const card = track.querySelector<HTMLElement>('.industry-card')
-    const cardW = card?.offsetWidth ?? 360
-    const gap = 24
-    return (cardW + gap) * industries.length
+    if (!track) return
+    const maxScroll = track.scrollWidth - track.clientWidth
+    setCanScrollPrev(track.scrollLeft > 4)
+    setCanScrollNext(track.scrollLeft < maxScroll - 4)
   }
 
   useEffect(() => {
@@ -78,46 +81,13 @@ export default function Industries() {
       }
     )
 
-    let isDesktop = window.matchMedia('(min-width: 1024px)').matches
-    let recenterTimer: number | undefined
-
-    const initPosition = () => {
-      if (!isDesktop) return
-      track.scrollLeft = measureOneSet()
-    }
-
-    // Silent reposition once scrolling settles, so the user always has a full
-    // copy of the strip on either side of the visible window — this is what
-    // makes the loop feel endless.
-    const recenter = () => {
-      if (!isDesktop) return
-      const oneSet = measureOneSet()
-      if (oneSet === 0) return
-      if (track.scrollLeft < oneSet * 0.5) {
-        track.scrollLeft += oneSet
-      } else if (track.scrollLeft > oneSet * 1.5) {
-        track.scrollLeft -= oneSet
-      }
-    }
-
-    const onScroll = () => {
-      if (recenterTimer) window.clearTimeout(recenterTimer)
-      recenterTimer = window.setTimeout(recenter, 120)
-    }
-
-    const onResize = () => {
-      isDesktop = window.matchMedia('(min-width: 1024px)').matches
-      initPosition()
-    }
-
-    initPosition()
-    track.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onResize)
+    updateArrows()
+    track.addEventListener('scroll', updateArrows, { passive: true })
+    window.addEventListener('resize', updateArrows)
 
     return () => {
-      track.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
-      if (recenterTimer) window.clearTimeout(recenterTimer)
+      track.removeEventListener('scroll', updateArrows)
+      window.removeEventListener('resize', updateArrows)
       ScrollTrigger.getAll().forEach((st) => {
         if (
           st.trigger === sectionRef.current ||
@@ -142,11 +112,11 @@ export default function Industries() {
     <section
       id="industries"
       ref={sectionRef}
-      className="w-full py-20 sm:py-24 lg:py-24 bg-midnight overflow-hidden"
+      className="section-texture w-full py-20 sm:py-24 lg:py-24 bg-midnight overflow-hidden"
     >
       {/* Section Header */}
       <div ref={headerRef} className="max-w-[1280px] mx-auto px-6 mb-10 lg:mb-12 text-center">
-        <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+        <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
           INDUSTRIES WE SERVE
         </span>
         <h2 className="anim-el text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
@@ -163,9 +133,10 @@ export default function Industries() {
           ref={trackRef}
           className="grid grid-cols-1 sm:grid-cols-2 gap-5 px-4 sm:px-6 max-w-[760px] mx-auto lg:max-w-none lg:mx-0 lg:flex lg:flex-nowrap lg:gap-6 lg:overflow-x-auto lg:snap-x lg:px-16 [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]"
         >
-          {loopedIndustries.map((industry, i) => (
-            <div
+          {industries.map((industry, i) => (
+            <Link
               key={i}
+              to="/industries"
               className="industry-card group relative w-full h-[280px] sm:h-[340px] lg:flex-shrink-0 lg:w-[360px] lg:h-[min(440px,55vh)] lg:snap-start rounded-2xl overflow-hidden cursor-pointer"
             >
             {/* Background Image */}
@@ -190,24 +161,26 @@ export default function Industries() {
                 Learn More <ArrowRight size={14} />
               </span>
             </div>
-            </div>
+            </Link>
           ))}
         </div>
 
-        {/* Desktop carousel controls */}
+        {/* Desktop carousel controls — disable at each end (no looping) */}
         <button
           type="button"
           onClick={() => scrollByCard(-1)}
+          disabled={!canScrollPrev}
           aria-label="Previous industries"
-          className="hidden lg:flex absolute left-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors"
+          className="hidden lg:flex absolute left-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
           <ChevronLeft size={22} />
         </button>
         <button
           type="button"
           onClick={() => scrollByCard(1)}
+          disabled={!canScrollNext}
           aria-label="Next industries"
-          className="hidden lg:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors"
+          className="hidden lg:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors disabled:opacity-30 disabled:pointer-events-none"
         >
           <ChevronRight size={22} />
         </button>

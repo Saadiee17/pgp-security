@@ -94,6 +94,17 @@
   }
 }
 
+/* Subtle background texture for otherwise-flat sections — a faint dot grid plus
+   a soft ambient glow at the top. Layers over whatever bg color the element has,
+   so it kills the "empty white space" feel without changing the palette. */
+.section-texture {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgb(var(--c-gold) / 0.06), transparent 70%),
+    radial-gradient(rgb(var(--c-gold) / 0.045) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  background-position: center top, center center;
+}
+
 /* Lenis smooth scroll */
 html.lenis,
 html.lenis body {

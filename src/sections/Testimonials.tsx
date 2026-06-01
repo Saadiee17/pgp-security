@@ -99,7 +99,7 @@ export default function Testimonials() {
       <div className="max-w-[1280px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+          <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
             CLIENT TESTIMONIALS
           </span>
           <h2 className="anim-el text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight opacity-0">

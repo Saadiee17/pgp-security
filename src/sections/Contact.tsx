@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Facebook, Youtube, MapPin, Phone, Clock, Award } from 'lucide-react'
+import { Facebook, Youtube, MapPin, Phone, Clock, Award, CheckCircle2 } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -28,6 +29,7 @@ export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const formRef = useRef<HTMLDivElement>(null)
   const infoRef = useRef<HTMLDivElement>(null)
+  const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -78,7 +80,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // In a real app, send form data to backend
-    alert('Thank you! We will contact you within 24 hours.')
+    setSubmitted(true)
   }
 
   const inputClass = "form-field w-full bg-white/5 border border-border-subtle rounded-lg px-4 py-3.5 text-ice-white placeholder-slate text-sm focus:border-gold focus:ring-2 focus:ring-gold/15 focus:outline-none transition-all duration-200 opacity-0"
@@ -93,16 +95,38 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Left — Form */}
           <div ref={formRef} className="lg:col-span-3">
-            <span className="form-field block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+            <span className="form-field block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
               GET IN TOUCH
             </span>
             <h2 className="form-field text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
-              Request a Free Security Quote
+              Request a Free Security Assessment
             </h2>
             <p className="form-field text-slate text-base mb-8 opacity-0">
               Fill out the form below and our team will respond within 24 hours with a customized security plan.
             </p>
 
+            {submitted ? (
+              <div className="bg-midnight border border-gold/30 rounded-2xl p-8 sm:p-10 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-5">
+                  <CheckCircle2 size={34} className="text-gold" />
+                </div>
+                <h3 className="text-ice-white text-2xl font-semibold mb-2">Request Submitted</h3>
+                <p className="text-slate text-sm sm:text-base max-w-[420px]">
+                  Thank you{formData.name ? `, ${formData.name.split(' ')[0]}` : ''}! Your request has been
+                  received. A PGP specialist will contact you within 24 hours.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false)
+                    setFormData({ name: '', email: '', phone: '', service: '', company: '', message: '' })
+                  }}
+                  className="mt-7 border border-border-subtle text-ice-white px-7 py-3 rounded-lg font-medium text-sm hover:border-gold hover:text-gold transition-all duration-200"
+                >
+                  Send Another Request
+                </button>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
@@ -161,13 +185,14 @@ export default function Contact() {
                 type="submit"
                 className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0"
               >
-                Get My Free Quote
+                Get My Free Assessment
               </button>
             </form>
+            )}
 
             <p className="form-field text-slate text-xs mt-4 opacity-0">
               For employment inquiries, please visit our{' '}
-              <a href="#" className="text-gold hover:underline">Employment page</a>.
+              <Link to="/careers" className="text-gold hover:underline">Careers page</Link>.
             </p>
           </div>
 
@@ -176,7 +201,7 @@ export default function Contact() {
             <div className="bg-midnight border border-border-subtle rounded-2xl p-6 sm:p-8 space-y-6">
               {/* Phone */}
               <div className="info-block">
-                <div className="flex items-center gap-2 text-gold text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+                <div className="flex items-center gap-2 text-gold text-sm font-semibold tracking-[0.08em] uppercase mb-2">
                   <Phone size={12} />
                   PHONE
                 </div>
@@ -190,7 +215,7 @@ export default function Contact() {
 
               {/* Address */}
               <div className="info-block">
-                <div className="flex items-center gap-2 text-gold text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+                <div className="flex items-center gap-2 text-gold text-sm font-semibold tracking-[0.08em] uppercase mb-2">
                   <MapPin size={12} />
                   ADDRESS
                 </div>
@@ -200,7 +225,7 @@ export default function Contact() {
 
               {/* Hours */}
               <div className="info-block">
-                <div className="flex items-center gap-2 text-gold text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+                <div className="flex items-center gap-2 text-gold text-sm font-semibold tracking-[0.08em] uppercase mb-2">
                   <Clock size={12} />
                   AVAILABILITY
                 </div>
@@ -210,7 +235,7 @@ export default function Contact() {
 
               {/* License */}
               <div className="info-block">
-                <div className="flex items-center gap-2 text-gold text-xs font-semibold tracking-[0.08em] uppercase mb-2">
+                <div className="flex items-center gap-2 text-gold text-sm font-semibold tracking-[0.08em] uppercase mb-2">
                   <Award size={12} />
                   LICENSE
                 </div>
@@ -262,7 +287,7 @@ export default function Contact() {
               />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="bg-gold/20 backdrop-blur-sm border border-gold/30 rounded-lg px-4 py-2">
-                  <span className="text-gold text-xs font-semibold">425 Aldine Bender Rd</span>
+                  <span className="text-gold text-sm font-semibold">425 Aldine Bender Rd</span>
                 </div>
               </div>
             </div>

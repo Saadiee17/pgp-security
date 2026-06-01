@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Link } from 'react-router'
-import { Phone, ChevronDown } from 'lucide-react'
+import { Phone } from 'lucide-react'
+import { useAssessment } from '@/components/AssessmentModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -51,6 +51,7 @@ export default function Hero() {
   const textGroupRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
+  const { open: openAssessment } = useAssessment()
 
   useEffect(() => {
     const v = videoRef.current
@@ -149,14 +150,6 @@ export default function Hero() {
 
     return () => ctx.revert()
   }, [])
-
-  const [recSeconds, setRecSeconds] = useState(0)
-  useEffect(() => {
-    const id = window.setInterval(() => setRecSeconds((s) => s + 1), 1000)
-    return () => window.clearInterval(id)
-  }, [])
-  const mm = String(Math.floor(recSeconds / 60)).padStart(2, '0')
-  const ss = String(recSeconds % 60).padStart(2, '0')
 
   return (
     <section
@@ -274,13 +267,14 @@ export default function Hero() {
           </p>
 
           <div className="hero-ctas flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-10 sm:mt-12 w-full sm:w-auto px-2 sm:px-0">
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={() => openAssessment()}
               className="group relative overflow-hidden bg-gold text-gold-ink px-6 py-3 sm:px-9 sm:py-4 rounded-sm font-semibold text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.2em] uppercase shadow-[0_0_0_1px_rgba(200,164,94,0.6),0_0_40px_rgba(200,164,94,0.25)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(200,164,94,0.9),0_0_60px_rgba(200,164,94,0.45)] max-w-full"
             >
               <span className="relative z-10">Get Free Security Assessment</span>
               <span className="absolute inset-0 bg-gold-light translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </Link>
+            </button>
             <a
               href="tel:2814484900"
               className="group flex items-center gap-3 text-ice-white text-xs tracking-[0.2em] uppercase"
@@ -293,29 +287,6 @@ export default function Hero() {
               </span>
             </a>
           </div>
-        </div>
-
-        <div className="hero-meta absolute bottom-8 left-8 z-30 flex items-center gap-3 font-mono text-[10px] tracking-[0.25em] uppercase text-gold/70 mix-blend-screen">
-          <span className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            Rec {mm}:{ss}
-          </span>
-          <span className="text-slate/40">·</span>
-          <span>24 FPS</span>
-          <span className="text-slate/40">·</span>
-          <span>Reel 01 / Protection</span>
-        </div>
-
-        <div className="hero-meta absolute bottom-8 right-8 z-30 flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-slate/70">
-          <span>Scroll</span>
-          <ChevronDown size={14} className="text-gold animate-bounce-gentle" />
-        </div>
-
-        <div className="hero-meta absolute top-8 left-8 z-30 flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] uppercase text-gold/60">
-          <span className="w-3 h-3 border border-gold/60 rounded-full flex items-center justify-center">
-            <span className="w-1 h-1 bg-gold/80 rounded-full" />
-          </span>
-          A-Cam · Scene 01
         </div>
       </div>
     </section>

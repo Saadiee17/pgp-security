@@ -37,7 +37,7 @@ export default function ContactPage() {
         />
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="max-w-[720px]">
-            <span className="anim-el opacity-0 inline-block text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-5">
+            <span className="anim-el opacity-0 inline-block text-gold text-sm font-semibold tracking-[0.12em] uppercase mb-5">
               GET IN TOUCH
             </span>
             <h1 className="anim-el opacity-0 text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6">
@@ -104,7 +104,7 @@ export default function ContactPage() {
       <section className="w-full py-20 sm:py-24 bg-deep-navy border-b border-border-subtle">
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="max-w-[720px] mb-12">
-            <span className="block text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-4">
+            <span className="block text-gold text-sm font-semibold tracking-[0.12em] uppercase mb-4">
               OUR OFFICES
             </span>
             <h2 className="text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4">

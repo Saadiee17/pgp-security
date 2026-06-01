@@ -94,7 +94,7 @@ export default function BranchPage() {
             <ArrowLeft size={14} />
             All Locations
           </Link>
-          <span className="hero-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+          <span className="hero-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
             {city.region}
           </span>
           <h1 className="hero-el text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] mb-6 opacity-0">

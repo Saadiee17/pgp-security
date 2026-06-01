@@ -158,7 +158,7 @@ export default function WhyChooseUs() {
 
           {/* Right — Content */}
           <div ref={contentRef}>
-            <span className="eyebrow block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+            <span className="eyebrow block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
               WHY CHOOSE PGP
             </span>
             <h2 className="headline text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-4 opacity-0">

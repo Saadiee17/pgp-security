@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Shield, Eye, HandshakeIcon, Users, Award, Clock, MapPin, Star } from 'lucide-react'
 import CTABanner from '@/sections/CTABanner'
+import { useAssessment } from '@/components/AssessmentModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,13 +38,35 @@ const stats = [
   { value: 'Statewide', label: 'Texas Licensed', icon: Award },
 ]
 
+// Placeholder team — update names/roles and add /person-1.jpg, /person-2.jpg,
+// /person-3.jpg to /public to populate the photos.
+const team = [
+  {
+    name: 'Team Member One',
+    role: 'Founder & President',
+    bio: 'Leading PGP Security since 1985 with a hands-on commitment to client safety and officer excellence.',
+  },
+  {
+    name: 'Team Member Two',
+    role: 'Director of Operations',
+    bio: 'Oversees dispatch, patrol coordination, and field operations across the Greater Houston area.',
+  },
+  {
+    name: 'Team Member Three',
+    role: 'Head of Training',
+    bio: 'Runs our in-house training program, ensuring every officer meets PGP standards before deployment.',
+  },
+]
+
 export default function About() {
   const heroRef = useRef<HTMLDivElement>(null)
   const storyRef = useRef<HTMLDivElement>(null)
   const valuesRef = useRef<HTMLDivElement>(null)
   const statsRef = useRef<HTMLDivElement>(null)
   const teamRef = useRef<HTMLDivElement>(null)
+  const teamGridRef = useRef<HTMLDivElement>(null)
   const ctaCardRef = useRef<HTMLDivElement>(null)
+  const { open: openAssessment } = useAssessment()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -112,6 +135,18 @@ export default function About() {
         )
       }
 
+      // Meet Our Team — header + cards stagger in
+      if (teamGridRef.current) {
+        gsap.fromTo(
+          teamGridRef.current.querySelectorAll('.team-anim'),
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1, y: 0, stagger: 0.12, duration: 0.65, ease: 'power3.out',
+            scrollTrigger: { trigger: teamGridRef.current, start: 'top 80%' },
+          }
+        )
+      }
+
       // CTA card
       if (ctaCardRef.current) {
         gsap.fromTo(
@@ -133,22 +168,23 @@ export default function About() {
       {/* ── Hero ── */}
       <section
         ref={heroRef}
-        className="w-full pt-[140px] pb-20 lg:pb-28 bg-deep-navy relative overflow-hidden"
+        className="w-full pt-[150px] pb-20 lg:pb-28 relative overflow-hidden"
       >
-        {/* Subtle radial glow */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(200,164,94,0.07) 0%, transparent 65%)' }}
-        />
+        {/* Background image + scrim */}
+        <div className="absolute inset-0">
+          <img src="/about-us-1.jpg" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
+        </div>
         {/* Gold top edge accent */}
         <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(200,164,94,0.4), transparent)' }}
         />
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="max-w-[720px]">
-            <span className="hero-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+            <span className="hero-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
               ABOUT PGP SECURITY
             </span>
             <h1 className="hero-el text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] mb-6 opacity-0">
@@ -179,7 +215,7 @@ export default function About() {
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             <div>
-              <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+              <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
                 OUR STORY
               </span>
               <h2 className="anim-el text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
@@ -241,7 +277,7 @@ export default function About() {
       >
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-12">
-            <span className="anim-header block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+            <span className="anim-header block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
               MISSION & VALUES
             </span>
             <h2 className="anim-header text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
@@ -279,7 +315,7 @@ export default function About() {
         />
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="text-center mb-10">
-            <span className="stat-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-3 opacity-0">
+            <span className="stat-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-3 opacity-0">
               BY THE NUMBERS
             </span>
             <h2 className="stat-el text-ice-white text-2xl sm:text-3xl font-semibold tracking-tight opacity-0">
@@ -326,7 +362,7 @@ export default function About() {
 
             {/* Copy */}
             <div>
-              <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
+              <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-5 opacity-0">
                 OUR OPERATIONS
               </span>
               <h2 className="anim-el text-ice-white text-3xl sm:text-4xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
@@ -362,6 +398,53 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── Meet Our Team ── */}
+      <section ref={teamGridRef} className="section-texture w-full py-20 lg:py-28 bg-midnight relative overflow-hidden">
+        <div
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(200,164,94,0.3), transparent)' }}
+        />
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <span className="team-anim block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+              MEET OUR TEAM
+            </span>
+            <h2 className="team-anim text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
+              The People Behind PGP
+            </h2>
+            <p className="team-anim text-slate text-base sm:text-lg max-w-[560px] mx-auto opacity-0">
+              Decades of combined experience, led by professionals who treat your security as their own.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 max-w-[980px] mx-auto">
+            {team.map((member, i) => (
+              <div
+                key={member.name}
+                className="team-anim team-card opacity-0 group rounded-2xl overflow-hidden border border-border-subtle bg-deep-navy hover:border-gold/30 transition-colors duration-300"
+              >
+                {/* Photo with graceful fallback — drop person-1/2/3.jpg into /public to populate */}
+                <div className="relative h-72 bg-gradient-to-br from-midnight to-deep-navy flex items-center justify-center overflow-hidden">
+                  <Users size={48} className="text-gold/20" />
+                  <img
+                    src={`/person-${i + 1}.jpg`}
+                    alt={member.name}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/80 via-transparent to-transparent pointer-events-none" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-ice-white text-lg font-semibold">{member.name}</h3>
+                  <p className="text-gold text-sm font-medium mt-0.5">{member.role}</p>
+                  <p className="text-slate text-sm leading-relaxed mt-3">{member.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Inline CTA Card ── */}
       <section className="w-full py-16 bg-midnight border-t border-border-subtle">
         <div className="max-w-[1280px] mx-auto px-6">
@@ -374,7 +457,7 @@ export default function About() {
               style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,164,94,0.05) 0%, transparent 60%)' }}
             />
             <div className="relative z-10">
-              <span className="block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4">
+              <span className="block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
                 WORK WITH US
               </span>
               <h2 className="text-ice-white text-2xl sm:text-3xl font-semibold tracking-tight mb-4">
@@ -385,12 +468,13 @@ export default function About() {
                 tailored to your property and budget.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
-                  to="/contact"
+                <button
+                  type="button"
+                  onClick={() => openAssessment()}
                   className="bg-gold text-gold-ink px-10 py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.25)] transition-all duration-200"
                 >
-                  Get a Free Quote
-                </Link>
+                  Get a Free Assessment
+                </button>
                 <Link
                   to="/careers"
                   className="border border-ice-white/30 text-ice-white px-10 py-4 rounded-lg font-medium text-sm hover:border-gold hover:text-gold transition-all duration-200"

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { Menu, X, Phone } from 'lucide-react'
 import gsap from 'gsap'
 import ThemeToggle from '@/components/ThemeToggle'
+import { useAssessment } from '@/components/AssessmentModal'
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -18,7 +19,7 @@ export default function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
+  const { open: openAssessment } = useAssessment()
 
   useEffect(() => {
     if (mobileMenuRef.current) {
@@ -44,9 +45,9 @@ export default function Header() {
     }
   }, [isMobileOpen])
 
-  const goToContact = () => {
+  const handleGetQuote = () => {
     setIsMobileOpen(false)
-    navigate('/contact')
+    openAssessment()
   }
 
   return (
@@ -98,7 +99,7 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle compact />
             <button
-              onClick={goToContact}
+              onClick={handleGetQuote}
               className="border border-border-subtle text-ice-white px-6 py-2.5 rounded-lg text-sm font-medium hover:border-gold hover:text-gold transition-all duration-200"
             >
               Get Quote
@@ -153,7 +154,7 @@ export default function Header() {
         ))}
         <div className="mobile-link flex flex-col gap-3 mt-4 w-[200px]">
           <button
-            onClick={goToContact}
+            onClick={handleGetQuote}
             className="border border-gold text-gold px-6 py-3 rounded-lg text-base font-medium"
           >
             Get Quote

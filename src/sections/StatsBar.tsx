@@ -89,7 +89,7 @@ export default function StatsBar() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-deep-navy border-t border-border-subtle py-16 sm:py-20"
+      className="section-texture w-full bg-deep-navy border-t border-border-subtle py-16 sm:py-20"
     >
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">

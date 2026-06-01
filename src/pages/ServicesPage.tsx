@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import Services from '@/sections/Services'
 import CTABanner from '@/sections/CTABanner'
+import { useAssessment } from '@/components/AssessmentModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -28,6 +29,7 @@ export default function ServicesPage() {
   const heroRef = useRef<HTMLDivElement>(null)
   const calloutRef = useRef<HTMLDivElement>(null)
   const industriesRef = useRef<HTMLDivElement>(null)
+  const { open: openAssessment } = useAssessment()
 
   useEffect(() => {
     if (!heroRef.current) return
@@ -87,23 +89,42 @@ export default function ServicesPage() {
       {/* Hero */}
       <section
         ref={heroRef}
-        className="pt-[140px] pb-20 sm:pb-28 bg-midnight relative overflow-hidden"
+        className="relative pt-[150px] pb-20 sm:pb-28 overflow-hidden"
       >
+        {/* Background image + scrim. */}
+        <div className="absolute inset-0">
+          <img
+            src="/services-1.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
+        </div>
         <div
-          className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+          className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(200,164,94,0.4), transparent)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/60 to-transparent pointer-events-none" />
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
-          <span className="hero-anim block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+          <span className="hero-anim block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
             OUR SERVICES
           </span>
-          <h1 className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
+          <h1 className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6 opacity-0 max-w-[760px]">
             Security Services<br />Built Around You
           </h1>
-          <p className="hero-anim text-slate text-base sm:text-lg max-w-[580px] opacity-0">
+          <p className="hero-anim text-slate-light text-base sm:text-lg max-w-[580px] opacity-0">
             Whether you need a single guard or a full-site security program, PGP deploys licensed professionals matched to your environment, threat level, and budget.
           </p>
+          <div className="hero-anim flex flex-wrap gap-3 mt-8 opacity-0">
+            {industries.map(({ name, icon: Icon }) => (
+              <span
+                key={name}
+                className="inline-flex items-center gap-2 bg-white/5 border border-border-subtle rounded-full px-4 py-2 text-sm text-slate-light backdrop-blur-sm"
+              >
+                <Icon size={14} className="text-gold" /> {name}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -128,12 +149,13 @@ export default function ServicesPage() {
                 Every property is different. Our security consultants will assess your site, identify vulnerabilities, and build a custom solution, at no charge.
               </p>
             </div>
-            <Link
-              to="/contact"
+            <button
+              type="button"
+              onClick={() => openAssessment()}
               className="flex-shrink-0 inline-flex items-center gap-2 bg-gold text-gold-ink px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(200,164,94,0.25)] transition-all duration-200 whitespace-nowrap"
             >
               Get a Free Assessment <ArrowRight size={16} />
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -149,7 +171,7 @@ export default function ServicesPage() {
         />
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="mb-10">
-            <span className="ind-header block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-3 opacity-0">
+            <span className="ind-header block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-3 opacity-0">
               INDUSTRIES WE SERVE
             </span>
             <h2 className="ind-header text-ice-white text-2xl sm:text-3xl font-semibold tracking-tight opacity-0">

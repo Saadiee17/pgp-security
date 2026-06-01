@@ -64,7 +64,7 @@ export default function ProblemSection() {
     <section
       id="problem"
       ref={sectionRef}
-      className="w-full py-20 lg:py-28 bg-deep-navy relative overflow-hidden"
+      className="section-texture w-full py-20 lg:py-28 bg-deep-navy relative overflow-hidden"
     >
       {/* Subtle red-tinted top edge to signal "problem" framing */}
       <div
@@ -75,10 +75,10 @@ export default function ProblemSection() {
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
-          <span className="anim-header block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+          <span className="anim-header block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
             THE PROBLEM
           </span>
-          <h2 className="anim-header text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
+          <h2 className="anim-header text-ice-white text-4xl sm:text-5xl lg:text-[3.25rem] font-semibold tracking-tight leading-[1.08] mb-4 opacity-0">
             Most Security Companies<br />Show Up, But Don't Deliver
           </h2>
           <p className="anim-header text-slate text-base sm:text-lg max-w-[560px] mx-auto opacity-0">

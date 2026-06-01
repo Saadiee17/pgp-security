@@ -20,11 +20,11 @@ const navLinks = [
 ]
 
 const serviceLinks = [
-  { label: 'Armed Guards', to: '/services' },
-  { label: 'Unarmed Guards', to: '/services' },
-  { label: 'Patrol Services', to: '/services' },
-  { label: 'Alarm Response', to: '/services' },
-  { label: 'Temporary Security', to: '/services' },
+  { label: 'Armed Guards', to: '/services/armed-guards' },
+  { label: 'Unarmed Guards', to: '/services/unarmed-guards' },
+  { label: 'Patrol Services', to: '/services/patrol-services' },
+  { label: 'Alarm Response', to: '/services/alarm-response' },
+  { label: 'Temporary Security', to: '/services/temporary-security' },
 ]
 
 export default function Footer() {
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4">
+            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               NAVIGATION
             </h4>
             <ul className="space-y-2.5">
@@ -84,7 +84,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4">
+            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               OUR SERVICES
             </h4>
             <ul className="space-y-2.5">
@@ -103,7 +103,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4">
+            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               CONTACT US
             </h4>
             <div className="space-y-2 text-sm">

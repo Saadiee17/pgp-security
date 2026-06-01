@@ -49,7 +49,7 @@ export default function LocationsSection() {
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="mb-10 text-center">
-          <span className="anim-el block text-gold text-xs font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
+          <span className="anim-el block text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4 opacity-0">
             SERVICE AREA
           </span>
           <h2 className="anim-el text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">

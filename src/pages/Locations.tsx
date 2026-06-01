@@ -68,12 +68,22 @@ export default function Locations() {
   return (
     <div className="bg-deep-navy min-h-screen">
       {/* Hero */}
-      <section ref={heroRef} className="w-full pt-[140px] pb-20 bg-midnight border-b border-border-subtle relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(200,164,94,1) 39px, rgba(200,164,94,1) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(200,164,94,1) 39px, rgba(200,164,94,1) 40px)' }}
-        />
+      <section ref={heroRef} className="w-full pt-[150px] pb-24 border-b border-border-subtle relative overflow-hidden">
+        {/* Background video + scrim */}
+        <div className="absolute inset-0">
+          <video
+            src="/locations-1.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/85 via-deep-navy/80 to-deep-navy" />
+        </div>
         <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center">
-          <span className="anim-el opacity-0 inline-block text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-5">
+          <span className="anim-el opacity-0 inline-block text-gold text-sm font-semibold tracking-[0.12em] uppercase mb-5">
             SERVICE AREA
           </span>
           <h1 className="anim-el opacity-0 text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6">

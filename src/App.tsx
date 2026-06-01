@@ -6,6 +6,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import ServicesPage from './pages/ServicesPage'
+import ServiceDetail from './pages/ServiceDetail'
 import IndustriesPage from './pages/IndustriesPage'
 import Locations from './pages/Locations'
 import BranchPage from './pages/BranchPage'
@@ -54,6 +55,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<ServicesPage />} />
+        <Route path="services/:slug" element={<ServiceDetail />} />
         <Route path="industries" element={<IndustriesPage />} />
         <Route path="locations" element={<Locations />} />
         <Route path="locations/:city" element={<BranchPage />} />

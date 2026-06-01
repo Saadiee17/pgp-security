@@ -1,67 +1,62 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { HardHat, Building2, Home, Factory, CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { HardHat, Building2, Home, Factory, CalendarDays, ArrowRight } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// `span` controls each tile's footprint in the lg bento grid (3 cols × 3 rows).
+// Construction is the 2×2 hero tile; Industrial is a 2×1 wide tile; the rest
+// are 1×1. Together they tile a perfect 3×3 with no gaps.
 const industries = [
   {
     name: 'Construction',
     description: 'Material and equipment protection, vandalism prevention, and access control for active job sites.',
     image: '/industry-industrial.jpg',
     icon: HardHat,
+    span: 'lg:col-span-2 lg:row-span-2',
   },
   {
     name: 'Commercial',
     description: 'Premises protection, access control, and surveillance for offices, retail, and business parks.',
     image: '/images/20260512_113621.jpg',
     icon: Building2,
+    span: 'lg:col-span-1 lg:row-span-1',
   },
   {
     name: 'Residential',
     description: 'Community patrols, gated entry management, and residential security for neighborhoods.',
     image: '/industry-residential.jpg',
     icon: Home,
+    span: 'lg:col-span-1 lg:row-span-1',
   },
   {
     name: 'Industrial',
     description: 'Inventory monitoring, theft prevention, and site surveillance for warehouses and logistics facilities.',
     image: '/industry-industrial.jpg',
     icon: Factory,
+    span: 'lg:col-span-2 lg:row-span-1',
   },
   {
     name: 'Events',
     description: 'Crowd control, access management, and emergency response for concerts, conferences, and gatherings.',
     image: '/images/20260512_150918.jpg',
     icon: CalendarDays,
+    span: 'lg:col-span-1 lg:row-span-1',
   },
 ]
 
 export default function Industries() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const trackRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
-  const [canScrollPrev, setCanScrollPrev] = useState(false)
-  const [canScrollNext, setCanScrollNext] = useState(true)
-
-  // Keep the arrow buttons in sync with how far the strip has been scrolled.
-  // Once the last card is reached the "next" button disables; at the start the
-  // "prev" button disables. No looping.
-  const updateArrows = () => {
-    const track = trackRef.current
-    if (!track) return
-    const maxScroll = track.scrollWidth - track.clientWidth
-    setCanScrollPrev(track.scrollLeft > 4)
-    setCanScrollNext(track.scrollLeft < maxScroll - 4)
-  }
 
   useEffect(() => {
-    if (!sectionRef.current || !trackRef.current) return
+    if (!sectionRef.current || !gridRef.current) return
 
-    const track = trackRef.current
-    const cards = track.querySelectorAll('.industry-card')
+    const grid = gridRef.current
+    const cards = grid.querySelectorAll('.industry-card')
 
     gsap.fromTo(
       headerRef.current?.querySelectorAll('.anim-el') || [],
@@ -77,21 +72,15 @@ export default function Industries() {
       { opacity: 0, y: 40 },
       {
         opacity: 1, y: 0, stagger: 0.1, duration: 0.6,
-        scrollTrigger: { trigger: track, start: 'top 80%' },
+        scrollTrigger: { trigger: grid, start: 'top 80%' },
       }
     )
 
-    updateArrows()
-    track.addEventListener('scroll', updateArrows, { passive: true })
-    window.addEventListener('resize', updateArrows)
-
     return () => {
-      track.removeEventListener('scroll', updateArrows)
-      window.removeEventListener('resize', updateArrows)
       ScrollTrigger.getAll().forEach((st) => {
         if (
           st.trigger === sectionRef.current ||
-          st.trigger === trackRef.current ||
+          st.trigger === gridRef.current ||
           st.trigger === headerRef.current
         ) {
           st.kill(true)
@@ -99,14 +88,6 @@ export default function Industries() {
       })
     }
   }, [])
-
-  const scrollByCard = (dir: 1 | -1) => {
-    const track = trackRef.current
-    if (!track) return
-    const card = track.querySelector<HTMLElement>('.industry-card')
-    const step = card ? card.offsetWidth + 24 : track.clientWidth * 0.8
-    track.scrollBy({ left: dir * step, behavior: 'smooth' })
-  }
 
   return (
     <section
@@ -127,18 +108,18 @@ export default function Industries() {
         </p>
       </div>
 
-      {/* Mobile/tablet: responsive grid. Desktop: horizontally scrollable strip with arrow controls. */}
-      <div className="relative">
-        <div
-          ref={trackRef}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-5 px-4 sm:px-6 max-w-[760px] mx-auto lg:max-w-none lg:mx-0 lg:flex lg:flex-nowrap lg:gap-6 lg:overflow-x-auto lg:snap-x lg:px-16 [&::-webkit-scrollbar]:hidden [scrollbar-width:none] [-ms-overflow-style:none]"
-        >
-          {industries.map((industry, i) => (
-            <Link
-              key={i}
-              to="/industries"
-              className="industry-card group relative w-full h-[280px] sm:h-[340px] lg:flex-shrink-0 lg:w-[360px] lg:h-[min(440px,55vh)] lg:snap-start rounded-2xl overflow-hidden cursor-pointer"
-            >
+      {/* Bento grid — single column on mobile, 2-up on small screens, and an
+          asymmetric 3×3 bento on desktop where Construction is the hero tile. */}
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:auto-rows-[clamp(180px,22vw,260px)] gap-5 lg:gap-6 max-w-[1280px] mx-auto px-6"
+      >
+        {industries.map((industry, i) => (
+          <Link
+            key={i}
+            to="/industries"
+            className={`industry-card group relative w-full h-[280px] sm:h-[320px] lg:h-auto rounded-2xl overflow-hidden cursor-pointer ${industry.span}`}
+          >
             {/* Background Image */}
             <img
               src={industry.image}
@@ -161,29 +142,8 @@ export default function Industries() {
                 Learn More <ArrowRight size={14} />
               </span>
             </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Desktop carousel controls — disable at each end (no looping) */}
-        <button
-          type="button"
-          onClick={() => scrollByCard(-1)}
-          disabled={!canScrollPrev}
-          aria-label="Previous industries"
-          className="hidden lg:flex absolute left-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors disabled:opacity-30 disabled:pointer-events-none"
-        >
-          <ChevronLeft size={22} />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollByCard(1)}
-          disabled={!canScrollNext}
-          aria-label="Next industries"
-          className="hidden lg:flex absolute right-3 top-1/2 -translate-y-1/2 z-10 h-12 w-12 items-center justify-center rounded-full bg-deep-navy/80 backdrop-blur-sm border border-border-subtle text-ice-white hover:bg-gold hover:text-deep-navy hover:border-gold transition-colors disabled:opacity-30 disabled:pointer-events-none"
-        >
-          <ChevronRight size={22} />
-        </button>
+          </Link>
+        ))}
       </div>
     </section>
   )

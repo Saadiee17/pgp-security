@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import { CheckCircle2, ShieldCheck } from 'lucide-react'
+import { CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { submitToWeb3Forms } from '@/lib/web3forms'
 
 const serviceOptions = [
   'Armed Guards',
@@ -40,6 +41,8 @@ const AssessmentContext = createContext<AssessmentContextValue | null>(null)
 export function AssessmentProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -51,6 +54,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
 
   const open = useCallback((presetService?: string) => {
     setSubmitted(false)
+    setError('')
     setForm((f) => ({ ...f, service: presetService ?? f.service }))
     setIsOpen(true)
   }, [])
@@ -64,10 +68,32 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, POST `form` to the backend here.
-    setSubmitted(true)
+    setError('')
+    setSubmitting(true)
+
+    const result = await submitToWeb3Forms(
+      {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        service: form.service,
+        company: form.company,
+        message: form.message,
+      },
+      {
+        subject: 'New Security Assessment Request — PGP Website',
+        from_name: 'PGP Security Website',
+      },
+    )
+
+    setSubmitting(false)
+    if (result.success) {
+      setSubmitted(true)
+    } else {
+      setError(result.message)
+    }
   }
 
   const value = useMemo<AssessmentContextValue>(() => ({ open }), [open])
@@ -120,6 +146,15 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
               </DialogHeader>
 
               <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
+                {/* Honeypot — bots fill this; humans never see it. */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <input
                     type="text"
@@ -176,11 +211,24 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                 />
+                {error && (
+                  <p className="text-red-400 text-sm" role="alert">
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="w-full bg-gold text-gold-ink py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200"
+                  disabled={submitting}
+                  className="w-full bg-gold text-gold-ink py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
-                  Submit Request
+                  {submitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Submit Request'
+                  )}
                 </button>
               </form>
             </div>

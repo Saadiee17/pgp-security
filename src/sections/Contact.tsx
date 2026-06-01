@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Facebook, Youtube, MapPin, Phone, Clock, Award, CheckCircle2 } from 'lucide-react'
+import { Facebook, Youtube, MapPin, Phone, Clock, Award, CheckCircle2, Loader2 } from 'lucide-react'
+import { submitToWeb3Forms } from '@/lib/web3forms'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,6 +31,8 @@ export default function Contact() {
   const formRef = useRef<HTMLDivElement>(null)
   const infoRef = useRef<HTMLDivElement>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -77,10 +80,32 @@ export default function Contact() {
     }
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, send form data to backend
-    setSubmitted(true)
+    setError('')
+    setSubmitting(true)
+
+    const result = await submitToWeb3Forms(
+      {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        service: formData.service,
+        company: formData.company,
+        message: formData.message,
+      },
+      {
+        subject: 'New Security Assessment Request — PGP Website',
+        from_name: 'PGP Security Website',
+      },
+    )
+
+    setSubmitting(false)
+    if (result.success) {
+      setSubmitted(true)
+    } else {
+      setError(result.message)
+    }
   }
 
   const inputClass = "form-field w-full bg-white/5 border border-border-subtle rounded-lg px-4 py-3.5 text-ice-white placeholder-slate text-sm focus:border-gold focus:ring-2 focus:ring-gold/15 focus:outline-none transition-all duration-200 opacity-0"
@@ -119,6 +144,7 @@ export default function Contact() {
                   type="button"
                   onClick={() => {
                     setSubmitted(false)
+                    setError('')
                     setFormData({ name: '', email: '', phone: '', service: '', company: '', message: '' })
                   }}
                   className="mt-7 border border-border-subtle text-ice-white px-7 py-3 rounded-lg font-medium text-sm hover:border-gold hover:text-gold transition-all duration-200"
@@ -128,6 +154,15 @@ export default function Contact() {
               </div>
             ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Honeypot — bots fill this; humans never see it. */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
@@ -181,11 +216,24 @@ export default function Contact() {
                 value={formData.message}
                 onChange={e => setFormData({ ...formData, message: e.target.value })}
               />
+              {error && (
+                <p className="text-red-400 text-sm" role="alert">
+                  {error}
+                </p>
+              )}
               <button
                 type="submit"
-                className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0"
+                disabled={submitting}
+                className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
               >
-                Get My Free Assessment
+                {submitting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Get My Free Assessment'
+                )}
               </button>
             </form>
             )}

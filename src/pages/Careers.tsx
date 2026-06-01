@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { DollarSign, GraduationCap, TrendingUp, Users, CheckCircle } from 'lucide-react'
+import { DollarSign, GraduationCap, TrendingUp, Users, CheckCircle, Loader2 } from 'lucide-react'
 import CTABanner from '@/sections/CTABanner'
+import { submitToWeb3Forms } from '@/lib/web3forms'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -71,7 +72,6 @@ interface FormState {
   position: string
   experience: string
   licenseStatus: string
-  resume: File | null
   message: string
 }
 
@@ -82,6 +82,8 @@ export default function Careers() {
   const formRef = useRef<HTMLDivElement>(null)
 
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState<FormState>({
     name: '',
     email: '',
@@ -89,7 +91,6 @@ export default function Careers() {
     position: '',
     experience: '',
     licenseStatus: '',
-    resume: null,
     message: '',
   })
 
@@ -152,10 +153,40 @@ export default function Careers() {
     return () => ctx.revert()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, send the application to the backend here.
-    setSubmitted(true)
+    setError('')
+    setSubmitting(true)
+
+    const positionLabel =
+      positionOptions.find((o) => o.value === formData.position)?.label ?? formData.position
+    const experienceLabel =
+      experienceOptions.find((o) => o.value === formData.experience)?.label ?? formData.experience
+    const licenseLabel =
+      licenseOptions.find((o) => o.value === formData.licenseStatus)?.label ?? formData.licenseStatus
+
+    const result = await submitToWeb3Forms(
+      {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        position: positionLabel,
+        experience: experienceLabel,
+        license_status: licenseLabel,
+        message: formData.message,
+      },
+      {
+        subject: 'New Job Application — PGP Careers',
+        from_name: 'PGP Security Careers',
+      },
+    )
+
+    setSubmitting(false)
+    if (result.success) {
+      setSubmitted(true)
+    } else {
+      setError(result.message)
+    }
   }
 
   const set = (field: keyof FormState) =>
@@ -340,7 +371,8 @@ export default function Careers() {
                     type="button"
                     onClick={() => {
                       setSubmitted(false)
-                      setFormData({ name: '', email: '', phone: '', position: '', experience: '', licenseStatus: '', resume: null, message: '' })
+                      setError('')
+                      setFormData({ name: '', email: '', phone: '', position: '', experience: '', licenseStatus: '', message: '' })
                     }}
                     className="mt-7 border border-border-subtle text-ice-white px-7 py-3 rounded-lg font-medium text-sm hover:border-gold hover:text-gold transition-all duration-200"
                   >
@@ -349,6 +381,15 @@ export default function Careers() {
                 </div>
               ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Honeypot — bots fill this; humans never see it. */}
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
@@ -416,19 +457,6 @@ export default function Careers() {
                   </select>
                 </div>
 
-                {/* File input */}
-                <div className="form-field opacity-0">
-                  <label className="block text-slate text-xs font-medium mb-2 tracking-wide uppercase">
-                    Resume (PDF, DOC, DOCX)
-                  </label>
-                  <input
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    className="w-full bg-white/5 border border-border-subtle rounded-lg px-4 py-3 text-slate text-sm file:mr-4 file:py-1.5 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-gold/15 file:text-gold hover:file:bg-gold/25 cursor-pointer focus:border-gold focus:ring-2 focus:ring-gold/15 focus:outline-none transition-all duration-200"
-                    onChange={(e) => setFormData(prev => ({ ...prev, resume: e.target.files?.[0] ?? null }))}
-                  />
-                </div>
-
                 <textarea
                   placeholder="Tell us about yourself: experience, why you want to join PGP, availability..."
                   rows={4}
@@ -437,11 +465,24 @@ export default function Careers() {
                   onChange={set('message')}
                 />
 
+                {error && (
+                  <p className="text-red-400 text-sm" role="alert">
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0"
+                  disabled={submitting}
+                  className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
-                  Submit Application
+                  {submitting ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Application'
+                  )}
                 </button>
               </form>
               )}

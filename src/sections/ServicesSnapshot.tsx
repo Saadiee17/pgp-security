@@ -11,21 +11,25 @@ const snapshots = [
     icon: ShieldCheck,
     title: 'Armed Guards',
     blurb: 'Licensed armed officers for high-risk environments and maximum deterrence.',
+    image: '/service-armed-guards.webp',
   },
   {
     icon: Car,
     title: 'Patrol Services',
     blurb: 'Mobile patrol in marked vehicles covering large areas on scheduled routes.',
+    image: '/service-patrol.webp',
   },
   {
     icon: Bell,
     title: 'Alarm Response',
     blurb: '24/7 monitoring with rapid dispatch the moment your alarm triggers.',
+    image: '/service-alarm-response.webp',
   },
   {
     icon: Shield,
     title: 'Site Security',
     blurb: 'Dedicated on-site presence keeping your property protected around the clock.',
+    image: '/service-unarmed-guards.webp',
   },
 ]
 
@@ -89,14 +93,27 @@ export default function ServicesSnapshot() {
             <Link
               key={i}
               to="/services"
-              className="snapshot-card group bg-deep-navy border border-border-subtle rounded-2xl p-6 hover:border-gold/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] transition-all duration-300 opacity-0 flex flex-col"
+              className="snapshot-card group bg-deep-navy border border-border-subtle rounded-2xl overflow-hidden hover:border-gold/40 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)] transition-all duration-300 opacity-0 flex flex-col"
             >
-              <s.icon size={36} className="text-gold mb-5 flex-shrink-0" />
-              <h3 className="text-ice-white text-lg font-semibold mb-2">{s.title}</h3>
-              <p className="text-slate text-sm leading-relaxed flex-1">{s.blurb}</p>
-              <span className="inline-flex items-center gap-1.5 text-gold text-xs font-medium mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                Learn More <ArrowRight size={12} />
-              </span>
+              {/* Photo header */}
+              <div className="relative h-36 overflow-hidden">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-deep-navy/30 to-transparent" />
+              </div>
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1">
+                <s.icon size={32} className="text-gold mb-4 flex-shrink-0" />
+                <h3 className="text-ice-white text-lg font-semibold mb-2">{s.title}</h3>
+                <p className="text-slate text-sm leading-relaxed flex-1">{s.blurb}</p>
+                <span className="inline-flex items-center gap-1.5 text-gold text-xs font-medium mt-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Learn More <ArrowRight size={12} />
+                </span>
+              </div>
             </Link>
           ))}
         </div>

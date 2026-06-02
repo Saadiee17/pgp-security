@@ -51,6 +51,7 @@ export default function CTABanner() {
 
   return (
     <section
+      id="cta-banner"
       ref={sectionRef}
       className="w-full py-20 sm:py-28 relative overflow-hidden"
       style={{
@@ -58,6 +59,15 @@ export default function CTABanner() {
           'linear-gradient(135deg, rgb(var(--c-deep-navy)) 0%, rgb(var(--c-midnight)) 50%, rgb(var(--c-deep-navy)) 100%)',
       }}
     >
+      {/* Background photo behind a strong veil — adds texture without hurting the CTA's legibility. */}
+      <img
+        src="/services-1.webp"
+        alt=""
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/90" />
+
       {/* Animated glow */}
       <div
         ref={glowRef}

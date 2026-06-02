@@ -64,8 +64,9 @@ export default function ServiceDetail() {
             alt={service.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/92 to-deep-navy/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/40" />
+          {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/78 via-deep-navy/50 to-deep-navy/18" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/50 via-transparent to-deep-navy/15" />
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">

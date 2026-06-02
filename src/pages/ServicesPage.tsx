@@ -98,8 +98,9 @@ export default function ServicesPage() {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
+          {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
         </div>
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"

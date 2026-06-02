@@ -97,6 +97,15 @@
   }
 }
 
+/* Light theme washed the photos out: the off-white scrim faded the hero
+   images. Hero overlays now use a lighter veil in light mode (with the
+   original darker scrim restored via `dark:` variants), and this small
+   contrast/saturation lift restores the punch dark mode already has. Scoped
+   away from the logo so brand marks aren't tinted. */
+.light img:not([src*="logo"]):not([src*="favicon"]) {
+  filter: contrast(1.06) saturate(1.1) brightness(0.98);
+}
+
 /* Subtle background texture for otherwise-flat sections — a faint dot grid plus
    a soft ambient glow at the top. Layers over whatever bg color the element has,
    so it kills the "empty white space" feel without changing the palette. */

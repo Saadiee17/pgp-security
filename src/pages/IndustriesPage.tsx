@@ -210,9 +210,11 @@ export default function IndustriesPage() {
           <img
             src="/industry-corporate.webp"
             alt=""
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/85 via-deep-navy/80 to-deep-navy" />
+          {/* Same light veil as the other hero banners so the photo reads clearly. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
         </div>
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"

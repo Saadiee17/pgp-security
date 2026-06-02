@@ -80,7 +80,9 @@ export default function Locations() {
             preload="auto"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/85 via-deep-navy/80 to-deep-navy" />
+          {/* Light, near-even veil (centered text) so the video stays clear like the other heroes. */}
+          <div className="absolute inset-0 bg-deep-navy/50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/15 via-transparent to-deep-navy/25" />
         </div>
         <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center">
           <span className="anim-el opacity-0 inline-block text-gold text-sm font-semibold tracking-[0.12em] uppercase mb-5">

@@ -85,7 +85,10 @@
     @apply border-border;
   }
   html {
-    scroll-behavior: smooth;
+    /* Lenis owns smooth scrolling. Native `scroll-behavior: smooth` here
+       double-animates anchor jumps and fights Lenis during its dynamic-import
+       window, which reads as lag. Lenis re-enables `auto` via .lenis-smooth. */
+    scroll-behavior: auto;
   }
   body {
     @apply bg-deep-navy text-ice-white antialiased;

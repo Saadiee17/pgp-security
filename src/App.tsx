@@ -1,17 +1,22 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Layout from './components/Layout'
+
+// Route-level code splitting: each page ships as its own chunk and is fetched
+// only when the route is visited, instead of all pages living in the initial
+// bundle. The Home page stays eagerly imported so the landing route paints
+// without an extra round-trip.
 import Home from './pages/Home'
-import About from './pages/About'
-import ServicesPage from './pages/ServicesPage'
-import ServiceDetail from './pages/ServiceDetail'
-import IndustriesPage from './pages/IndustriesPage'
-import Locations from './pages/Locations'
-import BranchPage from './pages/BranchPage'
-import ContactPage from './pages/ContactPage'
-import Careers from './pages/Careers'
+const About = lazy(() => import('./pages/About'))
+const ServicesPage = lazy(() => import('./pages/ServicesPage'))
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'))
+const IndustriesPage = lazy(() => import('./pages/IndustriesPage'))
+const Locations = lazy(() => import('./pages/Locations'))
+const BranchPage = lazy(() => import('./pages/BranchPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
+const Careers = lazy(() => import('./pages/Careers'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,8 +29,10 @@ function App() {
     const initLenis = async () => {
       const Lenis = (await import('lenis')).default
       lenis = new Lenis({
-        duration: 1.2,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        // lerp drives the snappy, responsive feel: each frame the scroll
+        // position moves 10% of the way to the target, so the page tracks
+        // the wheel closely instead of the long ~1.2s glide it had before.
+        lerp: 0.1,
         smoothWheel: true,
       })
 
@@ -50,19 +57,21 @@ function App() {
   }, [])
 
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="services" element={<ServicesPage />} />
-        <Route path="services/:slug" element={<ServiceDetail />} />
-        <Route path="industries" element={<IndustriesPage />} />
-        <Route path="locations" element={<Locations />} />
-        <Route path="locations/:city" element={<BranchPage />} />
-        <Route path="contact" element={<ContactPage />} />
-        <Route path="careers" element={<Careers />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={null}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="services/:slug" element={<ServiceDetail />} />
+          <Route path="industries" element={<IndustriesPage />} />
+          <Route path="locations" element={<Locations />} />
+          <Route path="locations/:city" element={<BranchPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="careers" element={<Careers />} />
+        </Route>
+      </Routes>
+    </Suspense>
   )
 }
 

@@ -207,7 +207,7 @@ export default function Careers() {
       >
         {/* Background image + scrim */}
         <div className="absolute inset-0">
-          <img src="/career1.jpg" alt="" className="w-full h-full object-cover" />
+          <img src="/career1.webp" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
           <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
         </div>

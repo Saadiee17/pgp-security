@@ -42,12 +42,12 @@ export default function Footer() {
           <div>
             <Link to="/" className="inline-block">
               <img
-                src="./pgp-logo.png"
+                src="./pgp-logo.webp"
                 alt="PGP Security, Serving Since 1985"
                 className="h-28 w-auto object-contain mb-3 block dark:hidden"
               />
               <img
-                src="./pgp-logo-dark.png"
+                src="./pgp-logo-dark.webp"
                 alt="PGP Security, Serving Since 1985"
                 className="h-28 w-auto object-contain mb-3 hidden dark:block"
               />

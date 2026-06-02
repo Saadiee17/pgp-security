@@ -27,7 +27,7 @@ const industries: Industry[] = [
     icon: HardHat,
     name: 'Construction',
     tagline: 'Job-site protection that never clocks out.',
-    image: '/industry-industrial.jpg',
+    image: '/industry-industrial.webp',
     challenge:
       'Active job sites are prime targets after hours. Copper theft, tool vandalism, and unauthorized equipment access can cost hundreds of thousands in losses and delays, yet most contractors rely on fencing alone.',
     solutions: [
@@ -46,7 +46,7 @@ const industries: Industry[] = [
     icon: Building2,
     name: 'Commercial',
     tagline: 'A confident presence for offices, retail, and campuses.',
-    image: '/industry-corporate.jpg',
+    image: '/industry-corporate.webp',
     challenge:
       'Office parks, retail centers, and business campuses face shoplifting, trespassing, and after-hours break-ins. A visible security presence reduces risk and reassures employees, tenants, and customers alike.',
     solutions: [
@@ -65,7 +65,7 @@ const industries: Industry[] = [
     icon: Home,
     name: 'Residential',
     tagline: 'Safe, welcoming communities at every gate.',
-    image: '/industry-residential.jpg',
+    image: '/industry-residential.webp',
     challenge:
       'Gated communities and HOAs need consistent, professional security without the cost of a full-time police presence. Residents expect both safety and a welcoming atmosphere at every entry point.',
     solutions: [
@@ -84,7 +84,7 @@ const industries: Industry[] = [
     icon: Factory,
     name: 'Industrial',
     tagline: 'Locking down inventory around the clock.',
-    image: '/images/20260512_120829.jpg',
+    image: '/images/20260512_120829.webp',
     challenge:
       'Warehouses, logistics hubs, and manufacturing facilities hold significant inventory and operate around the clock. Internal theft, cargo diversion, and unauthorized access are persistent threats in high-turnover environments.',
     solutions: [
@@ -103,7 +103,7 @@ const industries: Industry[] = [
     icon: CalendarDays,
     name: 'Events',
     tagline: 'Crowd-ready security for any gathering.',
-    image: '/industry-event.jpg',
+    image: '/industry-event.webp',
     challenge:
       'Concerts, corporate conferences, and public gatherings concentrate large crowds in unpredictable environments. Organizers need professional crowd management, rapid incident response, and seamless coordination with venue staff.',
     solutions: [
@@ -208,7 +208,7 @@ export default function IndustriesPage() {
       >
         <div className="absolute inset-0">
           <img
-            src="/industry-corporate.jpg"
+            src="/industry-corporate.webp"
             alt=""
             className="w-full h-full object-cover opacity-40"
           />

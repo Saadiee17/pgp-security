@@ -7,7 +7,7 @@ import { useAssessment } from '@/components/AssessmentModal'
 gsap.registerPlugin(ScrollTrigger)
 
 const HERO_VIDEO_SRC = '/pgp-home-video.mp4'
-const POSTER_FRAME = '/hero-frame-01.jpg'
+const POSTER_FRAME = '/hero-frame-01.webp'
 
 const HEADLINE_TOP = 'SECURITY YOU CAN SEE,'
 const HEADLINE_BOTTOM = 'TRACK, AND TRUST. 24/7'
@@ -71,6 +71,14 @@ export default function Hero() {
     if (!heroRef.current || !stageRef.current || !textGroupRef.current) return
 
     const ctx = gsap.context(() => {
+      // Cache targets once and use quickSetters so the scrub callback does no
+      // DOM queries and no per-frame object allocation while scrolling.
+      const vignette = heroRef.current!.querySelector('.hero-vignette')
+      const setTextOpacity = gsap.quickSetter(textGroupRef.current!, 'opacity')
+      const setTextY = gsap.quickSetter(textGroupRef.current!, 'y', 'px')
+      const setStageScale = gsap.quickSetter(stageRef.current!, 'scale')
+      const setVignette = vignette ? gsap.quickSetter(vignette, 'opacity') : null
+
       const trigger = ScrollTrigger.create({
         trigger: heroRef.current,
         start: 'top top',
@@ -78,9 +86,10 @@ export default function Hero() {
         scrub: 1,
         onUpdate: (self) => {
           const p = self.progress
-          gsap.set(textGroupRef.current, { opacity: 1 - p * 1.6, y: p * -40 })
-          gsap.set(stageRef.current, { scale: 1 + p * 0.08 })
-          gsap.set('.hero-vignette', { opacity: 0.7 + p * 0.3 })
+          setTextOpacity(1 - p * 1.6)
+          setTextY(p * -40)
+          setStageScale(1 + p * 0.08)
+          setVignette?.(0.7 + p * 0.3)
         },
       })
       return () => trigger.kill()
@@ -220,7 +229,7 @@ export default function Hero() {
             }}
           />
           <div
-            className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-[0.18]"
+            className="absolute inset-0 pointer-events-none opacity-[0.12]"
             style={{
               backgroundImage: `url("${grainSvg}")`,
               backgroundSize: '200px 200px',

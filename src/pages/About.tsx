@@ -38,8 +38,8 @@ const stats = [
   { value: 'Statewide', label: 'Texas Licensed', icon: Award },
 ]
 
-// Placeholder team — update names/roles and add /person-1.jpg, /person-2.jpg,
-// /person-3.jpg to /public to populate the photos.
+// Placeholder team — update names/roles and add /person-1.webp, /person-2.webp,
+// /person-3.webp to /public to populate the photos.
 const team = [
   {
     name: 'Team Member One',
@@ -172,7 +172,7 @@ export default function About() {
       >
         {/* Background image + scrim */}
         <div className="absolute inset-0">
-          <img src="/about-us-1.jpg" alt="" className="w-full h-full object-cover" />
+          <img src="/about-us-1.webp" alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-deep-navy via-deep-navy/90 to-deep-navy/55" />
           <div className="absolute inset-0 bg-gradient-to-t from-deep-navy via-transparent to-deep-navy/50" />
         </div>
@@ -347,7 +347,7 @@ export default function About() {
             {/* Image */}
             <div className="anim-el opacity-0 relative rounded-2xl overflow-hidden border border-border-subtle">
               <img
-                src="/images/20260512_111559.jpg"
+                src="/images/20260512_111559.webp"
                 alt="PGP Security team and operations"
                 className="w-full h-[380px] lg:h-[460px] object-cover"
               />
@@ -423,11 +423,11 @@ export default function About() {
                 key={member.name}
                 className="team-anim team-card opacity-0 group rounded-2xl overflow-hidden border border-border-subtle bg-deep-navy hover:border-gold/30 transition-colors duration-300"
               >
-                {/* Photo with graceful fallback — drop person-1/2/3.jpg into /public to populate */}
+                {/* Photo with graceful fallback — drop person-1/2/3.webp into /public to populate */}
                 <div className="relative h-72 bg-gradient-to-br from-midnight to-deep-navy flex items-center justify-center overflow-hidden">
                   <Users size={48} className="text-gold/20" />
                   <img
-                    src={`/person-${i + 1}.jpg`}
+                    src={`/person-${i + 1}.webp`}
                     alt={member.name}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

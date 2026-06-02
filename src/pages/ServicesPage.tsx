@@ -94,7 +94,7 @@ export default function ServicesPage() {
         {/* Background image + scrim. */}
         <div className="absolute inset-0">
           <img
-            src="/services-1.jpg"
+            src="/services-1.webp"
             alt=""
             className="w-full h-full object-cover"
           />

@@ -113,14 +113,14 @@ export default function Testimonials() {
           <button
             onClick={prev}
             disabled={currentIndex === 0}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/80 backdrop-blur-sm"
+            className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/90"
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={next}
             disabled={currentIndex >= maxIndex}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/80 backdrop-blur-sm"
+            className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/90"
           >
             <ChevronRight size={20} />
           </button>
@@ -134,7 +134,7 @@ export default function Testimonials() {
               {testimonials.map((t, i) => (
                 <div
                   key={i}
-                  className="testimonial-card flex-shrink-0 bg-white/[0.03] backdrop-blur-sm border border-border-subtle rounded-2xl p-6 sm:p-8 opacity-0"
+                  className="testimonial-card flex-shrink-0 bg-white/[0.05] border border-border-subtle rounded-2xl p-6 sm:p-8 opacity-0"
                   style={{ width: `calc(${100 / slidesPerView}% - ${(slidesPerView - 1) * 24 / slidesPerView}px)` }}
                 >
                   <Quote size={36} className="text-gold/30 mb-4" />

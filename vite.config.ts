@@ -15,4 +15,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split rarely-changing third-party code into its own long-lived
+        // chunks so editing page code doesn't bust the vendor cache. GSAP and
+        // React are the heaviest always-loaded deps.
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router'],
+          gsap: ['gsap'],
+        },
+      },
+    },
+  },
 });

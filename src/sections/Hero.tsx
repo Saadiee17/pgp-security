@@ -174,14 +174,15 @@ export default function Hero() {
             src={POSTER_FRAME}
             alt=""
             draggable={false}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            fetchPriority="high"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               videoReady ? 'opacity-0' : 'opacity-100'
             }`}
           />
 
           {/* Background video – "object-fit: cover" via viewport-based sizing */}
           <div
-            className={`hero-video-wrapper pointer-events-none transition-opacity duration-1000 ${
+            className={`hero-video-wrapper pointer-events-none transition-opacity duration-500 ${
               videoReady ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
@@ -201,7 +202,7 @@ export default function Hero() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               className="w-full h-full object-cover block"
             />
           </div>

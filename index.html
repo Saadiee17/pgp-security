@@ -9,6 +9,19 @@
     />
     <link rel="icon" type="image/webp" href="/pgp-logo.webp" />
     <link rel="shortcut icon" href="/favicon.ico" />
+
+    <!-- Fonts: preconnect + direct <link> (parallel) instead of a CSS @import chain,
+         so text paints sooner (FCP/LCP) and the swap shifts less (CLS). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Preload the hero poster (the LCP element) so it paints as early as possible. -->
+    <link rel="preload" as="image" href="/hero-frame-01.webp" fetchpriority="high" />
+
     <title>PGP Security - Houston</title>
     <script>
       (function () {

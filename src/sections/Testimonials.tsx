@@ -113,6 +113,7 @@ export default function Testimonials() {
           <button
             onClick={prev}
             disabled={currentIndex === 0}
+            aria-label="Previous testimonials"
             className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/90"
           >
             <ChevronLeft size={20} />
@@ -120,6 +121,7 @@ export default function Testimonials() {
           <button
             onClick={next}
             disabled={currentIndex >= maxIndex}
+            aria-label="Next testimonials"
             className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full border border-border-subtle flex items-center justify-center text-ice-white hover:border-gold hover:text-gold transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed bg-deep-navy/90"
           >
             <ChevronRight size={20} />
@@ -156,10 +158,16 @@ export default function Testimonials() {
               <button
                 key={i}
                 onClick={() => setCurrentIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? 'bg-gold w-6' : 'bg-slate/40 hover:bg-slate/60'
-                }`}
-              />
+                aria-label={`Go to testimonial ${i + 1}`}
+                aria-current={i === currentIndex}
+                className="group p-2.5 -m-1.5 flex items-center justify-center"
+              >
+                <span
+                  className={`block h-2 rounded-full transition-all duration-300 ${
+                    i === currentIndex ? 'bg-gold w-6' : 'bg-slate/40 w-2 group-hover:bg-slate/60'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

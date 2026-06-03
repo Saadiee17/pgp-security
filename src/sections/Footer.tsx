@@ -65,9 +65,9 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
+            <h3 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               NAVIGATION
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.label}>
@@ -84,9 +84,9 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
+            <h3 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               OUR SERVICES
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
                 <li key={link.label}>
@@ -103,9 +103,9 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
+            <h3 className="text-gold text-sm font-semibold tracking-[0.1em] uppercase mb-4">
               CONTACT US
-            </h4>
+            </h3>
             <div className="space-y-2 text-sm">
               <p className="text-slate">
                 425 Aldine Bender Rd., Suite E<br />
@@ -126,6 +126,7 @@ export default function Footer() {
                 href="https://www.facebook.com/Professional-Guard-and-Patrol-Inc-452144301829618/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="PGP Security on Facebook"
                 className="text-slate hover:text-gold transition-colors"
               >
                 <Facebook size={20} />
@@ -134,6 +135,7 @@ export default function Footer() {
                 href="https://twitter.com/pgpinc1985"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="PGP Security on X (Twitter)"
                 className="text-slate hover:text-gold transition-colors"
               >
                 <XIcon size={20} />
@@ -142,6 +144,7 @@ export default function Footer() {
                 href="https://www.youtube.com/channel/UCC8DgvJU5mVR3dGZlLUTcbw"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="PGP Security on YouTube"
                 className="text-slate hover:text-gold transition-colors"
               >
                 <Youtube size={20} />

@@ -52,10 +52,13 @@ export default function ServiceDetail() {
 
   return (
     <div className="bg-deep-navy">
-      {/* Hero */}
+      {/* Hero — forced dark island in both themes: the service photo is vibrant,
+          so a light-mode scrim left the text unreadable. The `dark` class flips
+          the scrim to dark navy, the text to white, and the gold brighter (same
+          approach as the home Hero). */}
       <section
         ref={heroRef}
-        className="relative pt-[140px] pb-20 sm:pb-28 overflow-hidden"
+        className="dark relative pt-[140px] pb-20 sm:pb-28 overflow-hidden bg-deep-navy"
       >
         {/* Background image + scrim */}
         <div className="absolute inset-0">

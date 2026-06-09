@@ -66,13 +66,13 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img
-              src="./pgp-logo.webp"
-              alt="PGP Security, Serving Since 1985"
+              src="./pgp-logo-gold.webp"
+              alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
               className="h-14 w-auto object-contain block dark:hidden"
             />
             <img
-              src="./pgp-logo-dark.webp"
-              alt="PGP Security, Serving Since 1985"
+              src="./pgp-logo-silver.webp"
+              alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
               className="h-14 w-auto object-contain hidden dark:block"
             />
           </Link>

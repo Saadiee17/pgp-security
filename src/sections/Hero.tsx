@@ -149,12 +149,6 @@ export default function Hero() {
           { opacity: 1, y: 0, duration: 0.6, stagger: 0.12 },
           '-=0.4'
         )
-        .fromTo(
-          '.hero-meta',
-          { opacity: 0 },
-          { opacity: 1, duration: 0.8 },
-          '-=0.3'
-        )
     })
 
     return () => ctx.revert()

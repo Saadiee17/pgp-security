@@ -67,7 +67,9 @@ export default function ServiceDetail() {
             alt={service.title}
             className="w-full h-full object-cover"
           />
-          {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
+          {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible.
+              Client-approved: do NOT darken these stops — legibility on bright photos
+              comes from the text drop-shadows below, not from a heavier tint. */}
           <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/78 via-deep-navy/50 to-deep-navy/18" />
           <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/50 via-transparent to-deep-navy/15" />
         </div>
@@ -75,17 +77,23 @@ export default function ServiceDetail() {
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <Link
             to="/services"
-            className="hero-anim inline-flex items-center gap-2 text-slate hover:text-gold text-sm transition-colors mb-8"
+            className="hero-anim flex w-fit items-center gap-2 text-slate hover:text-gold text-sm transition-colors mb-8"
           >
             <ArrowLeft size={15} /> All Services
           </Link>
-          <div className="hero-anim inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gold/10 border border-gold/25 mb-6">
-            <Icon size={32} className="text-gold" />
+          <div className="hero-anim flex items-center justify-center w-12 h-12 rounded-xl bg-gold/10 border border-gold/25 mb-6">
+            <Icon size={24} className="text-gold" />
           </div>
-          <h1 className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-5 max-w-[760px]">
+          <h1
+            className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-5 max-w-[760px]"
+            style={{ textShadow: '0 1px 3px rgba(5,12,24,0.9), 0 3px 14px rgba(5,12,24,0.65)' }}
+          >
             {service.title}
           </h1>
-          <p className="hero-anim text-slate-light text-lg sm:text-xl max-w-[620px] leading-relaxed">
+          <p
+            className="hero-anim text-slate-light text-lg sm:text-xl max-w-[620px] leading-relaxed"
+            style={{ textShadow: '0 1px 3px rgba(5,12,24,0.85), 0 2px 10px rgba(5,12,24,0.55)' }}
+          >
             {service.blurb}
           </p>
           <div className="hero-anim flex flex-col sm:flex-row gap-4 mt-9">

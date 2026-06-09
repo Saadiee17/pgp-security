@@ -119,15 +119,15 @@ const industries: Industry[] = [
   },
 ]
 
-// Bento spans on a 6-column desktop grid with uniform row heights:
-//  Row 1 → Construction (4) + Commercial (2)  — same row, asymmetric widths
-//  Row 2 → Industrial (6)                      — full-width feature band
-//  Row 3 → Residential (3) + Events (3)        — balanced pair
+// Bento spans on a 6-column desktop grid. The interlock comes from the
+// 2-row feature tile — the small tiles stack into the space beside it:
+//  Rows 1–2 → Construction (4 wide × 2 tall) | Commercial (2) over Residential (2)
+//  Row 3    → Industrial (3) + Events (3)
 const bentoSpan: Record<string, string> = {
-  construction: 'lg:col-span-4',
+  construction: 'sm:col-span-2 lg:col-span-4 lg:row-span-2',
   commercial: 'lg:col-span-2',
-  industrial: 'lg:col-span-6',
-  residential: 'lg:col-span-3',
+  residential: 'lg:col-span-2',
+  industrial: 'lg:col-span-3',
   events: 'sm:col-span-2 lg:col-span-3',
 }
 
@@ -246,7 +246,7 @@ export default function IndustriesPage() {
           </div>
           <div
             ref={bentoRef}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5 lg:auto-rows-[300px]"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-5 lg:auto-rows-[280px]"
           >
             {industries.map(({ slug, name, tagline, image, icon: Icon }) => (
               <a
@@ -262,10 +262,14 @@ export default function IndustriesPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[rgba(5,12,24,0.96)] via-[rgba(10,22,40,0.55)] to-transparent" />
                 <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-2xl group-hover:ring-gold/30 transition-colors duration-300" />
                 <div className="relative h-full flex flex-col justify-end p-6 sm:p-7">
-                  <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 backdrop-blur-sm mb-4 w-fit">
+                  <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 backdrop-blur-sm mb-4">
                     <Icon size={22} className="text-gold" />
                   </div>
-                  <h3 className="text-white text-xl sm:text-2xl font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]">
+                  <h3
+                    className={`text-white font-semibold drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] ${
+                      slug === 'construction' ? 'text-2xl sm:text-3xl' : 'text-xl sm:text-2xl'
+                    }`}
+                  >
                     {name}
                   </h3>
                   <p className="text-white/85 text-sm mt-1 max-w-[36ch] drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">

@@ -58,35 +58,38 @@ export default function Header() {
         style={{
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
-          background: 'rgb(var(--c-deep-navy) / 0.85)',
-          borderBottom: '1px solid rgb(var(--c-ice-white) / var(--c-border-alpha))',
+          // Theme-adaptive surface: light (cream) in light theme, navy in dark.
+          // The logo gets a dark "plate" below so the metallic mark keeps
+          // contrast even on the light bar; all header text is dark-on-light.
+          background: 'rgb(var(--c-deep-navy) / 0.92)',
+          borderBottom: '1px solid rgb(var(--c-gold) / 0.3)',
         }}
       >
-        <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
+        <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
+          {/* Logo — gold (light theme) / silver (dark theme) */}
+          <Link to="/" className="flex items-center shrink-0">
             <img
               src="./pgp-logo-gold.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-14 w-auto object-contain block dark:hidden"
+              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain block dark:hidden"
             />
             <img
               src="./pgp-logo-silver.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-14 w-auto object-contain hidden dark:block"
+              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain hidden dark:block"
             />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-6">
             {navLinks.map((link) => (
               <NavLink
                 key={link.label}
                 to={link.to}
                 end={link.to === '/'}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition-colors duration-200 ${
-                    isActive ? 'text-gold' : 'text-slate hover:text-ice-white'
+                  `text-[15px] font-medium transition-colors duration-200 ${
+                    isActive ? 'text-[#7a5f1c] dark:text-gold' : 'text-slate hover:text-ice-white'
                   }`
                 }
               >
@@ -96,32 +99,32 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
             <ThemeToggle compact />
             <button
               onClick={handleGetQuote}
-              className="border border-border-subtle text-ice-white px-6 py-2.5 rounded-lg text-sm font-medium hover:border-gold hover:text-gold transition-all duration-200"
+              className="whitespace-nowrap border border-border-subtle text-ice-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:border-gold hover:bg-gold/10 transition-all duration-200"
             >
               Get Quote
             </button>
             <a
               href="tel:2814484900"
-              className="bg-gold text-gold-ink px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-gold-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
+              className="whitespace-nowrap bg-gold text-gold-ink px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-gold-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
             >
-              <Phone size={14} />
+              <Phone size={16} />
               Call Now
             </a>
           </div>
 
-          {/* Mobile controls */}
-          <div className="md:hidden flex items-center gap-2">
+          {/* Mobile / tablet controls */}
+          <div className="lg:hidden flex items-center gap-2">
             <ThemeToggle compact />
             <button
               className="text-ice-white p-2"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
             >
-              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
@@ -130,9 +133,9 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 opacity-0 pointer-events-none md:hidden flex flex-col items-center justify-center gap-6"
+        className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col items-center justify-center gap-6"
         style={{
-          background: 'rgb(var(--c-deep-navy) / 0.96)',
+          background: 'rgb(var(--c-deep-navy) / 0.97)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
         }}
@@ -144,18 +147,18 @@ export default function Header() {
             end={link.to === '/'}
             onClick={() => setIsMobileOpen(false)}
             className={({ isActive }) =>
-              `mobile-link text-2xl font-semibold transition-colors ${
-                isActive ? 'text-gold' : 'text-ice-white hover:text-gold'
+              `mobile-link text-[26px] font-semibold transition-colors ${
+                isActive ? 'text-[#7a5f1c] dark:text-gold' : 'text-ice-white hover:text-gold'
               }`
             }
           >
             {link.label}
           </NavLink>
         ))}
-        <div className="mobile-link flex flex-col gap-3 mt-4 w-[200px]">
+        <div className="mobile-link flex flex-col gap-3 mt-4 w-[220px]">
           <button
             onClick={handleGetQuote}
-            className="border border-gold text-gold px-6 py-3 rounded-lg text-base font-medium"
+            className="border border-gold text-[#7a5f1c] dark:text-gold px-6 py-3 rounded-lg text-base font-medium"
           >
             Get Quote
           </button>
@@ -163,7 +166,7 @@ export default function Header() {
             href="tel:2814484900"
             className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
           >
-            <Phone size={16} />
+            <Phone size={18} />
             Call Now
           </a>
         </div>

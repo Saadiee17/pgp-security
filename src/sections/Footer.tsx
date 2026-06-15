@@ -44,12 +44,7 @@ export default function Footer() {
               <img
                 src="./pgp-logo-gold.webp"
                 alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-                className="h-28 w-auto object-contain mb-3 block dark:hidden"
-              />
-              <img
-                src="./pgp-logo-silver.webp"
-                alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-                className="h-28 w-auto object-contain mb-3 hidden dark:block"
+                className="h-28 w-auto object-contain mb-3"
               />
             </Link>
             <div className="text-slate text-[10px] font-semibold tracking-[0.1em] uppercase mb-3">

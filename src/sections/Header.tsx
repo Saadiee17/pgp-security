@@ -66,17 +66,12 @@ export default function Header() {
         }}
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
-          {/* Logo — gold (light theme) / silver (dark theme) */}
+          {/* Logo — gold in both themes (client request) */}
           <Link to="/" className="flex items-center shrink-0">
             <img
               src="./pgp-logo-gold.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain block dark:hidden"
-            />
-            <img
-              src="./pgp-logo-silver.webp"
-              alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain hidden dark:block"
+              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain"
             />
           </Link>
 

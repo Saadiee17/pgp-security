@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MapPin, ArrowRight } from 'lucide-react'
 import HoustonMap from '@/components/HoustonMap'
+import { extendedAreas } from '@/data/serviceAreas'
 import CTABanner from '@/sections/CTABanner'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -104,6 +105,18 @@ export default function Locations() {
           <div ref={mapRef} className="opacity-0 rounded-2xl overflow-hidden border border-border-subtle">
             <HoustonMap height={420} />
           </div>
+          {/* Marker legend */}
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-xs text-slate">
+            <span className="inline-flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-gold shadow-[0_0_0_3px_rgba(200,164,94,0.22)]" />
+              Service cities
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full border-2 border-gold" />
+              Extended coverage
+            </span>
+            <span className="text-slate/70">Hover or tap any marker for the city name &amp; details.</span>
+          </div>
         </div>
       </section>
 
@@ -133,6 +146,29 @@ export default function Locations() {
                 <p className="text-slate text-xs leading-snug">{city.blurb}</p>
               </Link>
             ))}
+          </div>
+
+          {/* Extended coverage areas */}
+          <div className="border border-gold/25 rounded-2xl bg-midnight px-8 py-7 mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <div className="flex-1">
+                <h3 className="text-ice-white text-lg font-semibold mb-1">Extended service areas</h3>
+                <p className="text-slate text-sm leading-relaxed">
+                  We serve additional areas beyond the cities above — contact us to confirm coverage in your location.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {extendedAreas.map((area) => (
+                  <span
+                    key={area.name}
+                    className="inline-flex items-center gap-2 border border-gold/40 rounded-full px-4 py-2 text-ice-white text-sm"
+                  >
+                    <MapPin size={13} className="text-gold flex-shrink-0" />
+                    {area.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Don't see your area callout */}

@@ -1,81 +1,126 @@
+import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
+import { useTheme } from 'next-themes'
+import type * as Leaflet from 'leaflet'
+import { coreCities, extendedAreas } from '@/data/serviceAreas'
+
 interface HoustonMapProps {
   className?: string
   height?: number
 }
 
-const mapCities = [
-  { cx: 240, cy: 100, label: 'Houston',       primary: true },
-  { cx: 170, cy: 112, label: 'Katy' },
-  { cx: 210, cy: 148, label: 'Sugar Land' },
-  { cx: 268, cy:  38, label: 'The Woodlands' },
-  { cx: 258, cy: 156, label: 'Pearland' },
-  { cx: 185, cy:  68, label: 'Cypress' },
-  { cx: 272, cy:  56, label: 'Spring' },
-  { cx: 318, cy: 120, label: 'Pasadena' },
-  { cx: 290, cy: 168, label: 'League City' },
-  { cx: 278, cy: 178, label: 'Friendswood' },
-  { cx: 215, cy: 130, label: 'Missouri City' },
-  { cx: 200, cy:  48, label: 'Tomball' },
-  { cx: 278, cy:  22, label: 'Conroe' },
-  { cx: 330, cy:  78, label: 'Humble' },
-]
+// Free, key-less CARTO basemaps (OpenStreetMap data): dark matter for the dark
+// theme, Positron for the light theme.
+const TILES = {
+  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+}
 
 export default function HoustonMap({ className = '', height = 280 }: HoustonMapProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
+  const { resolvedTheme } = useTheme()
+  // Fall back to the live DOM class before next-themes has resolved, so the
+  // first render already picks the correct basemap (no flash / double build).
+  const isDark =
+    (resolvedTheme ??
+      (typeof document !== 'undefined' && document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light')) === 'dark'
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    let cancelled = false
+    let map: Leaflet.Map | undefined
+
+    // Load Leaflet on demand so it stays out of the entry bundle and only
+    // downloads when a map actually mounts.
+    void (async () => {
+      const L = (await import('leaflet')).default
+      await import('leaflet/dist/leaflet.css')
+      if (cancelled || !containerRef.current) return
+
+      map = L.map(containerRef.current, {
+        zoomControl: true,
+        scrollWheelZoom: false, // don't hijack page scrolling
+        attributionControl: true,
+      })
+
+      L.tileLayer(isDark ? TILES.dark : TILES.light, {
+        subdomains: 'abcd',
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      }).addTo(map)
+
+      // Small, crisp dot. Hit areas stay tight so markers never occlude each
+      // other in the dense cluster (every marker stays individually clickable).
+      const makeIcon = (extended: boolean) =>
+        L.divIcon({
+          className: 'pgp-marker-icon',
+          html: `<span class="pgp-marker ${extended ? 'pgp-marker--ext' : 'pgp-marker--core'}"></span>`,
+          iconSize: [14, 14],
+          iconAnchor: [7, 7],
+          popupAnchor: [0, -8],
+        })
+
+      const points = [...coreCities, ...extendedAreas]
+
+      points.forEach((p) => {
+        const marker = L.marker([p.lat, p.lng], {
+          icon: makeIcon(!!p.extended),
+          title: p.name,
+          riseOnHover: true,
+        }).addTo(map!)
+
+        // City name reveals on hover/tap (no permanent labels — the dense
+        // cluster would be an unreadable pile otherwise).
+        marker.bindTooltip(p.name, {
+          direction: 'top',
+          offset: [0, -8],
+          className: 'pgp-tooltip',
+        })
+
+        const popupEl = document.createElement('div')
+        popupEl.className = 'pgp-popup-body'
+        if (p.extended) {
+          popupEl.innerHTML =
+            `<strong>${p.name}</strong>` +
+            `<span class="pgp-popup-note">Extended coverage area</span>` +
+            `<button type="button">Confirm coverage &rarr;</button>`
+          popupEl.querySelector('button')!.addEventListener('click', () => navigate('/contact'))
+        } else {
+          popupEl.innerHTML =
+            `<strong>${p.name}</strong>` +
+            `<button type="button">View coverage &rarr;</button>`
+          popupEl
+            .querySelector('button')!
+            .addEventListener('click', () => navigate(`/locations/${p.slug}`))
+        }
+        marker.bindPopup(popupEl)
+      })
+
+      // Frame all markers (core + extended) so the full reach is visible.
+      const bounds = L.latLngBounds(points.map((p) => [p.lat, p.lng] as [number, number]))
+      map.fitBounds(bounds, { padding: [40, 40] })
+
+      // Ensure correct tile layout once the container has its final size.
+      requestAnimationFrame(() => map?.invalidateSize())
+    })()
+
+    return () => {
+      cancelled = true
+      map?.remove()
+    }
+  }, [navigate, isDark])
+
   return (
     <div
-      className={`w-full flex items-center justify-center ${className}`}
-      style={{
-        height: `${height}px`,
-        background: 'linear-gradient(135deg, #0d1f3c 0%, #0a1628 40%, #111e35 70%, #0d1f3c 100%)',
-      }}
-    >
-      <svg
-        viewBox="0 0 480 200"
-        className="w-full h-full"
-        style={{ maxHeight: `${height}px` }}
-        aria-label="Houston Region Map"
-      >
-        {/* Grid lines */}
-        {[40, 80, 120, 160].map(y => (
-          <line key={y} x1="0" y1={y} x2="480" y2={y} stroke="rgba(200,164,94,0.06)" strokeWidth="1" />
-        ))}
-        {[60, 120, 180, 240, 300, 360, 420].map(x => (
-          <line key={x} x1={x} y1="0" x2={x} y2="200" stroke="rgba(200,164,94,0.06)" strokeWidth="1" />
-        ))}
-        {/* Beltway ring */}
-        <ellipse cx="240" cy="100" rx="110" ry="72" fill="none" stroke="rgba(200,164,94,0.15)" strokeWidth="1.5" strokeDasharray="6 4" />
-        {/* Outer ring */}
-        <ellipse cx="240" cy="100" rx="185" ry="85" fill="none" stroke="rgba(200,164,94,0.07)" strokeWidth="1" strokeDasharray="4 6" />
-        {/* City dots */}
-        {mapCities.map((city) => (
-          <g key={city.label}>
-            <circle
-              cx={city.cx}
-              cy={city.cy}
-              r={city.primary ? 6 : 4}
-              fill={city.primary ? 'rgba(200,164,94,0.9)' : 'rgba(200,164,94,0.5)'}
-            />
-            {city.primary && (
-              <circle cx={city.cx} cy={city.cy} r={12} fill="none" stroke="rgba(200,164,94,0.25)" strokeWidth="1.5" />
-            )}
-            <text
-              x={city.cx + (city.primary ? 0 : 8)}
-              y={city.primary ? city.cy + 18 : city.cy - 8}
-              textAnchor={city.primary ? 'middle' : 'start'}
-              fill="rgba(200,164,94,0.8)"
-              fontSize={city.primary ? '10' : '7'}
-              fontFamily="monospace"
-              letterSpacing="0.05em"
-            >
-              {city.label}
-            </text>
-          </g>
-        ))}
-        {/* Footer label */}
-        <text x="240" y="192" textAnchor="middle" fill="rgba(200,164,94,0.25)" fontSize="9" fontFamily="monospace" letterSpacing="0.15em">
-          HOUSTON REGION MAP · PGP SERVICE AREA
-        </text>
-      </svg>
-    </div>
+      ref={containerRef}
+      className={`w-full ${className}`}
+      style={{ height: `${height}px`, background: isDark ? '#0A1628' : '#e6e8ec' }}
+      aria-label="Map of PGP Security service areas across Greater Houston"
+      role="img"
+    />
   )
 }

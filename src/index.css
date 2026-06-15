@@ -171,3 +171,102 @@ iframe#hero-yt-player {
   border: 0 !important;
   pointer-events: none;
 }
+
+/* ---- Leaflet (HoustonMap) dark theme ---- */
+/* Marker hit area: small visible dot, tight enough not to occlude neighbours */
+.pgp-marker-icon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.pgp-marker {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transition: transform 0.15s ease;
+}
+.pgp-marker-icon:hover .pgp-marker {
+  transform: scale(1.3);
+}
+.pgp-marker--core {
+  background: #c8a45e;
+  box-shadow: 0 0 0 4px rgba(200, 164, 94, 0.22), 0 0 12px rgba(200, 164, 94, 0.55);
+}
+.pgp-marker--ext {
+  background: transparent;
+  border: 2px solid #c8a45e;
+  box-shadow: 0 0 0 3px rgba(200, 164, 94, 0.14);
+}
+
+/* Hover tooltips — fixed dark background, so text must be an explicit light
+   colour (the theme's --c-ice-white is dark in light mode = invisible here). */
+.leaflet-tooltip.pgp-tooltip {
+  background: #111e35;
+  color: #f4f6fb;
+  border: 1px solid rgba(200, 164, 94, 0.4);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+.leaflet-tooltip.pgp-tooltip::before {
+  border-top-color: rgba(200, 164, 94, 0.4);
+}
+
+/* Click popups */
+.leaflet-popup.leaflet-popup .leaflet-popup-content-wrapper {
+  background: #111e35;
+  color: #f4f6fb;
+  border: 1px solid rgba(200, 164, 94, 0.35);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+.leaflet-popup .leaflet-popup-tip {
+  background: #111e35;
+  border: 1px solid rgba(200, 164, 94, 0.35);
+}
+.leaflet-popup .leaflet-popup-close-button {
+  color: rgba(255, 255, 255, 0.55);
+}
+.pgp-popup-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 2px 4px;
+  min-width: 130px;
+}
+.pgp-popup-body strong {
+  font-size: 14px;
+  color: #f4f6fb;
+}
+.pgp-popup-body .pgp-popup-note {
+  font-size: 11px;
+  color: #c8a45e;
+}
+.pgp-popup-body button {
+  align-self: flex-start;
+  background: #c8a45e;
+  color: #1a1206;
+  font-size: 12px;
+  font-weight: 600;
+  border: 0;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.pgp-popup-body button:hover {
+  background: #d8b97a;
+}
+/* Keep CARTO attribution legible on the dark canvas */
+.leaflet-control-attribution {
+  background: rgba(10, 22, 40, 0.7) !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.leaflet-control-attribution a {
+  color: rgba(200, 164, 94, 0.7) !important;
+}

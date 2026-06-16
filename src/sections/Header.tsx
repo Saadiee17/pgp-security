@@ -56,25 +56,26 @@ export default function Header() {
         ref={headerRef}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          // Frosted "smoked glass" bar in both themes: translucent dark tint +
-          // blur lets the page show through subtly, while staying dark enough to
-          // make the gold logo and light text pop (gold needs a dark backing).
+          // Theme-adaptive liquid frosted glass: the tint follows the theme
+          // (light/cream in light, navy in dark) via --c-deep-navy, while heavy
+          // blur + saturation + a specular top highlight give the glass feel.
           background:
-            'linear-gradient(180deg, rgba(9,17,31,0.88) 0%, rgba(9,17,31,0.80) 100%)',
-          backdropFilter: 'blur(16px) saturate(150%)',
-          WebkitBackdropFilter: 'blur(16px) saturate(150%)',
-          borderBottom: '1px solid rgb(var(--c-gold) / 0.3)',
+            'linear-gradient(180deg, rgb(var(--c-deep-navy) / 0.82) 0%, rgb(var(--c-deep-navy) / 0.68) 100%)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          borderBottom: '1px solid rgb(var(--c-gold) / 0.28)',
           boxShadow:
-            'inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 30px -14px rgba(0,0,0,0.5)',
+            'inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 30px -18px rgba(0,0,0,0.35)',
         }}
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
-          {/* Logo — gold in both themes (client request) */}
+          {/* Logo — gold in both themes. Drop-shadow gives the metallic mark
+              crisp edge definition on the light frosted bar (harmless on dark). */}
           <Link to="/" className="flex items-center shrink-0">
             <img
               src="./pgp-logo-gold.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain"
+              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain [filter:drop-shadow(0_1px_1px_rgba(0,0,0,0.55))_drop-shadow(0_2px_4px_rgba(0,0,0,0.35))]"
             />
           </Link>
 
@@ -87,7 +88,7 @@ export default function Header() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   `text-[15px] font-medium transition-colors duration-200 ${
-                    isActive ? 'text-[#E2C079]' : 'text-[#C9D2E0] hover:text-white'
+                    isActive ? 'text-[#7a5f1c] dark:text-[#E2C079]' : 'text-slate hover:text-ice-white'
                   }`
                 }
               >
@@ -101,13 +102,13 @@ export default function Header() {
             <ThemeToggle compact />
             <button
               onClick={handleGetQuote}
-              className="whitespace-nowrap border border-white/30 text-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:border-[#E2C079] hover:text-[#E2C079] hover:bg-white/5 transition-all duration-200"
+              className="whitespace-nowrap border border-border-subtle text-ice-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:border-gold hover:bg-gold/10 transition-all duration-200"
             >
               Get Quote
             </button>
             <a
               href="tel:2814484900"
-              className="whitespace-nowrap bg-[#C8A45E] text-[#0A1628] px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-[#d8b97a] hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
+              className="whitespace-nowrap bg-gold text-gold-ink px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-gold-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
             >
               <Phone size={16} />
               Call Now
@@ -118,7 +119,7 @@ export default function Header() {
           <div className="lg:hidden flex items-center gap-2">
             <ThemeToggle compact />
             <button
-              className="text-white p-2"
+              className="text-ice-white p-2"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
             >
@@ -134,9 +135,9 @@ export default function Header() {
         className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col items-center justify-center gap-6"
         style={{
           background:
-            'linear-gradient(180deg, rgba(9,17,31,0.94) 0%, rgba(9,17,31,0.90) 100%)',
-          backdropFilter: 'blur(22px) saturate(150%)',
-          WebkitBackdropFilter: 'blur(22px) saturate(150%)',
+            'linear-gradient(180deg, rgb(var(--c-deep-navy) / 0.92) 0%, rgb(var(--c-deep-navy) / 0.86) 100%)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
         }}
       >
         {navLinks.map((link) => (
@@ -147,7 +148,7 @@ export default function Header() {
             onClick={() => setIsMobileOpen(false)}
             className={({ isActive }) =>
               `mobile-link text-[26px] font-semibold transition-colors ${
-                isActive ? 'text-[#E2C079]' : 'text-white hover:text-[#E2C079]'
+                isActive ? 'text-[#7a5f1c] dark:text-[#E2C079]' : 'text-ice-white hover:text-gold'
               }`
             }
           >
@@ -157,13 +158,13 @@ export default function Header() {
         <div className="mobile-link flex flex-col gap-3 mt-4 w-[220px]">
           <button
             onClick={handleGetQuote}
-            className="border border-[#E2C079] text-[#E2C079] px-6 py-3 rounded-lg text-base font-medium"
+            className="border border-gold text-[#7a5f1c] dark:text-[#E2C079] px-6 py-3 rounded-lg text-base font-medium"
           >
             Get Quote
           </button>
           <a
             href="tel:2814484900"
-            className="bg-[#C8A45E] text-[#0A1628] px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
+            className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
           >
             <Phone size={18} />
             Call Now

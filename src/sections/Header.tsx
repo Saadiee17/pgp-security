@@ -54,35 +54,25 @@ export default function Header() {
     <>
       <header
         ref={headerRef}
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-0 left-0 right-0 z-50 overflow-hidden"
         style={{
-          // Theme-adaptive liquid frosted glass: the tint follows the theme
-          // (light/cream in light, navy in dark) via --c-deep-navy, while heavy
-          // blur + saturation + a specular top highlight give the glass feel.
-          background:
-            'linear-gradient(180deg, rgba(14,22,38,0.14) 0%, rgba(14,22,38,0.11) 100%), ' +
-            'linear-gradient(180deg, rgb(var(--c-deep-navy) / 0.82) 0%, rgb(var(--c-deep-navy) / 0.68) 100%)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderBottom: '1px solid rgb(var(--c-gold) / 0.28)',
-          boxShadow:
-            'inset 0 1px 0 rgba(255,255,255,0.28), 0 10px 30px -18px rgba(0,0,0,0.35)',
+          background: 'rgb(var(--c-deep-navy))',
+          borderBottom: '1px solid rgb(var(--c-gold) / 0.3)',
+          boxShadow: '0 6px 20px -14px rgba(0,0,0,0.4)',
         }}
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
-          {/* Logo — gold in both themes. A soft, blurred dark glow sits behind
-              the mark (blended into the glass, no hard edges) to lift the gold,
-              plus a drop-shadow for crisp edge definition. */}
-          <Link to="/" className="relative flex items-center shrink-0">
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-x-4 -inset-y-0.5 rounded-[26px] blur-md"
-              style={{ background: 'rgba(7,14,27,0.5)' }}
-            />
+          {/* Logo — sits on a dark slice that fills from the left edge and ends
+              where the logo ends, so the gold mark stays prominent in both
+              themes while the rest of the bar keeps the theme colour. */}
+          <Link
+            to="/"
+            className="header-logo-slice relative self-stretch flex items-center shrink-0 pr-6 lg:pr-9"
+          >
             <img
               src="./pgp-logo-gold.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="relative h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain [filter:drop-shadow(0_1px_1px_rgba(0,0,0,0.55))_drop-shadow(0_2px_4px_rgba(0,0,0,0.35))]"
+              className="relative h-[54px] lg:h-[58px] xl:h-[64px] w-auto object-contain"
             />
           </Link>
 
@@ -105,7 +95,7 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTAs */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+          <div className="hidden lg:flex items-center gap-3">
             <ThemeToggle compact />
             <button
               onClick={handleGetQuote}
@@ -140,12 +130,7 @@ export default function Header() {
       <div
         ref={mobileMenuRef}
         className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col items-center justify-center gap-6"
-        style={{
-          background:
-            'linear-gradient(180deg, rgb(var(--c-deep-navy) / 0.92) 0%, rgb(var(--c-deep-navy) / 0.86) 100%)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-        }}
+        style={{ background: 'rgb(var(--c-deep-navy))' }}
       >
         {navLinks.map((link) => (
           <NavLink

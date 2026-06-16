@@ -172,6 +172,41 @@ iframe#hero-yt-player {
   pointer-events: none;
 }
 
+/* Header logo "slice": a dark backing that fills from the left viewport edge to
+   just past the logo, finished with a diagonal (slanted) trailing edge. The logo
+   itself is rendered above the slice so it is never clipped. */
+.header-logo-slice {
+  position: relative;
+}
+.header-logo-slice > * {
+  position: relative;
+  z-index: 1;
+}
+.header-logo-slice::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: -100vw;
+  right: -34px;
+  background: #0a1628;
+  /* Slanted trailing edge */
+  clip-path: polygon(0 0, 100% 0, calc(100% - 34px) 100%, 0 100%);
+}
+/* Thin gold accent riding the slanted edge */
+.header-logo-slice::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: -4px;
+  bottom: -4px;
+  right: -16px;
+  width: 2px;
+  background: rgb(200 164 94 / 0.55);
+  transform: skewX(-21deg);
+}
+
 /* ---- Leaflet (HoustonMap) dark theme ---- */
 /* Marker hit area: small visible dot, tight enough not to occlude neighbours */
 .pgp-marker-icon {

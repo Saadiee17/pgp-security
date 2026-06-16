@@ -60,6 +60,7 @@ export default function Header() {
           // (light/cream in light, navy in dark) via --c-deep-navy, while heavy
           // blur + saturation + a specular top highlight give the glass feel.
           background:
+            'linear-gradient(180deg, rgba(14,22,38,0.14) 0%, rgba(14,22,38,0.11) 100%), ' +
             'linear-gradient(180deg, rgb(var(--c-deep-navy) / 0.82) 0%, rgb(var(--c-deep-navy) / 0.68) 100%)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',

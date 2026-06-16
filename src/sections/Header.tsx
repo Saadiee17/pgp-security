@@ -56,13 +56,16 @@ export default function Header() {
         ref={headerRef}
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          // Theme-adaptive surface: light (cream) in light theme, navy in dark.
-          // The logo gets a dark "plate" below so the metallic mark keeps
-          // contrast even on the light bar; all header text is dark-on-light.
-          background: 'rgb(var(--c-deep-navy) / 0.92)',
+          // Frosted "smoked glass" bar in both themes: translucent dark tint +
+          // blur lets the page show through subtly, while staying dark enough to
+          // make the gold logo and light text pop (gold needs a dark backing).
+          background:
+            'linear-gradient(180deg, rgba(9,17,31,0.88) 0%, rgba(9,17,31,0.80) 100%)',
+          backdropFilter: 'blur(16px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(150%)',
           borderBottom: '1px solid rgb(var(--c-gold) / 0.3)',
+          boxShadow:
+            'inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 30px -14px rgba(0,0,0,0.5)',
         }}
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
@@ -84,7 +87,7 @@ export default function Header() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   `text-[15px] font-medium transition-colors duration-200 ${
-                    isActive ? 'text-[#7a5f1c] dark:text-gold' : 'text-slate hover:text-ice-white'
+                    isActive ? 'text-[#E2C079]' : 'text-[#C9D2E0] hover:text-white'
                   }`
                 }
               >
@@ -98,13 +101,13 @@ export default function Header() {
             <ThemeToggle compact />
             <button
               onClick={handleGetQuote}
-              className="whitespace-nowrap border border-border-subtle text-ice-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:border-gold hover:bg-gold/10 transition-all duration-200"
+              className="whitespace-nowrap border border-white/30 text-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:border-[#E2C079] hover:text-[#E2C079] hover:bg-white/5 transition-all duration-200"
             >
               Get Quote
             </button>
             <a
               href="tel:2814484900"
-              className="whitespace-nowrap bg-gold text-gold-ink px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-gold-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
+              className="whitespace-nowrap bg-[#C8A45E] text-[#0A1628] px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-[#d8b97a] hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
             >
               <Phone size={16} />
               Call Now
@@ -115,7 +118,7 @@ export default function Header() {
           <div className="lg:hidden flex items-center gap-2">
             <ThemeToggle compact />
             <button
-              className="text-ice-white p-2"
+              className="text-white p-2"
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               aria-label={isMobileOpen ? 'Close menu' : 'Open menu'}
             >
@@ -130,9 +133,10 @@ export default function Header() {
         ref={mobileMenuRef}
         className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col items-center justify-center gap-6"
         style={{
-          background: 'rgb(var(--c-deep-navy) / 0.97)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background:
+            'linear-gradient(180deg, rgba(9,17,31,0.94) 0%, rgba(9,17,31,0.90) 100%)',
+          backdropFilter: 'blur(22px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(22px) saturate(150%)',
         }}
       >
         {navLinks.map((link) => (
@@ -143,7 +147,7 @@ export default function Header() {
             onClick={() => setIsMobileOpen(false)}
             className={({ isActive }) =>
               `mobile-link text-[26px] font-semibold transition-colors ${
-                isActive ? 'text-[#7a5f1c] dark:text-gold' : 'text-ice-white hover:text-gold'
+                isActive ? 'text-[#E2C079]' : 'text-white hover:text-[#E2C079]'
               }`
             }
           >
@@ -153,13 +157,13 @@ export default function Header() {
         <div className="mobile-link flex flex-col gap-3 mt-4 w-[220px]">
           <button
             onClick={handleGetQuote}
-            className="border border-gold text-[#7a5f1c] dark:text-gold px-6 py-3 rounded-lg text-base font-medium"
+            className="border border-[#E2C079] text-[#E2C079] px-6 py-3 rounded-lg text-base font-medium"
           >
             Get Quote
           </button>
           <a
             href="tel:2814484900"
-            className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
+            className="bg-[#C8A45E] text-[#0A1628] px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
           >
             <Phone size={18} />
             Call Now

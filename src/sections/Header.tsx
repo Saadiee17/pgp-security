@@ -129,38 +129,42 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       <div
         ref={mobileMenuRef}
-        className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col items-center justify-center gap-6"
+        className="fixed inset-0 z-40 opacity-0 pointer-events-none lg:hidden flex flex-col overflow-y-auto pt-[90px] md:pt-[106px] pb-8"
         style={{ background: 'rgb(var(--c-deep-navy))' }}
       >
-        {navLinks.map((link) => (
-          <NavLink
-            key={link.label}
-            to={link.to}
-            end={link.to === '/'}
-            onClick={() => setIsMobileOpen(false)}
-            className={({ isActive }) =>
-              `mobile-link text-[26px] font-semibold transition-colors ${
-                isActive ? 'text-[#7a5f1c] dark:text-[#E2C079]' : 'text-ice-white hover:text-gold'
-              }`
-            }
-          >
-            {link.label}
-          </NavLink>
-        ))}
-        <div className="mobile-link flex flex-col gap-3 mt-4 w-[220px]">
-          <button
-            onClick={handleGetQuote}
-            className="border border-gold text-[#7a5f1c] dark:text-[#E2C079] px-6 py-3 rounded-lg text-base font-medium"
-          >
-            Get Quote
-          </button>
-          <a
-            href="tel:2814484900"
-            className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
-          >
-            <Phone size={18} />
-            Call Now
-          </a>
+        {/* m-auto centers the block when there's room, and anchors it below the
+            header (scrollable) when the viewport is too short to fit everything. */}
+        <div className="m-auto flex flex-col items-center gap-6">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.label}
+              to={link.to}
+              end={link.to === '/'}
+              onClick={() => setIsMobileOpen(false)}
+              className={({ isActive }) =>
+                `mobile-link text-[26px] font-semibold transition-colors ${
+                  isActive ? 'text-[#7a5f1c] dark:text-[#E2C079]' : 'text-ice-white hover:text-gold'
+                }`
+              }
+            >
+              {link.label}
+            </NavLink>
+          ))}
+          <div className="mobile-link flex flex-col gap-3 mt-4 w-[220px]">
+            <button
+              onClick={handleGetQuote}
+              className="border border-gold text-[#7a5f1c] dark:text-[#E2C079] px-6 py-3 rounded-lg text-base font-medium"
+            >
+              Get Quote
+            </button>
+            <a
+              href="tel:2814484900"
+              className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
+            >
+              <Phone size={18} />
+              Call Now
+            </a>
+          </div>
         </div>
       </div>
     </>

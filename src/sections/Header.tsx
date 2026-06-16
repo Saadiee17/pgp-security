@@ -70,13 +70,19 @@ export default function Header() {
         }}
       >
         <div className="max-w-[1280px] mx-auto px-6 h-[78px] md:h-[92px] flex items-center justify-between">
-          {/* Logo — gold in both themes. Drop-shadow gives the metallic mark
-              crisp edge definition on the light frosted bar (harmless on dark). */}
-          <Link to="/" className="flex items-center shrink-0">
+          {/* Logo — gold in both themes. A soft, blurred dark glow sits behind
+              the mark (blended into the glass, no hard edges) to lift the gold,
+              plus a drop-shadow for crisp edge definition. */}
+          <Link to="/" className="relative flex items-center shrink-0">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-x-4 -inset-y-0.5 rounded-[26px] blur-md"
+              style={{ background: 'rgba(7,14,27,0.5)' }}
+            />
             <img
               src="./pgp-logo-gold.webp"
               alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-              className="h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain [filter:drop-shadow(0_1px_1px_rgba(0,0,0,0.55))_drop-shadow(0_2px_4px_rgba(0,0,0,0.35))]"
+              className="relative h-[58px] lg:h-[60px] xl:h-[68px] w-auto object-contain [filter:drop-shadow(0_1px_1px_rgba(0,0,0,0.55))_drop-shadow(0_2px_4px_rgba(0,0,0,0.35))]"
             />
           </Link>
 

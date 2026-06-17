@@ -213,8 +213,7 @@ export default function IndustriesPage() {
             className="w-full h-full object-cover"
           />
           {/* Same light veil as the other hero banners so the photo reads clearly. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/90" />
         </div>
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
@@ -227,7 +226,7 @@ export default function IndustriesPage() {
           <h1 className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6 opacity-0">
             Tailored Security for<br />Every Sector
           </h1>
-          <p className="hero-anim text-slate-light text-base sm:text-lg max-w-[600px] opacity-0">
+          <p className="hero-anim text-slate-light font-medium text-base sm:text-lg max-w-[600px] opacity-0">
             No two environments share the same risks. PGP studies your industry's specific vulnerabilities and deploys the right officers, protocols, and technology to match.
           </p>
         </div>

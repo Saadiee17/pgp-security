@@ -174,8 +174,7 @@ export default function About() {
         <div className="absolute inset-0">
           <img src="/about-us-1.webp" alt="" className="w-full h-full object-cover" />
           {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/90" />
         </div>
         {/* Gold top edge accent */}
         <div
@@ -191,7 +190,7 @@ export default function About() {
             <h1 className="hero-el text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] mb-6 opacity-0">
               Over 40 Years of<br className="hidden sm:block" /> Security Excellence
             </h1>
-            <p className="hero-el text-slate text-lg sm:text-xl leading-relaxed max-w-[580px] opacity-0">
+            <p className="hero-el text-slate-light font-medium text-lg sm:text-xl leading-relaxed max-w-[580px] opacity-0">
               Since 1985, Professional Guard & Patrol Inc. has been Houston's trusted partner in
               commercial security, built on discipline, accountability, and unwavering commitment
               to the communities we protect.

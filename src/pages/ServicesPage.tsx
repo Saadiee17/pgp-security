@@ -99,8 +99,7 @@ export default function ServicesPage() {
             className="w-full h-full object-cover"
           />
           {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/90" />
         </div>
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
@@ -113,7 +112,7 @@ export default function ServicesPage() {
           <h1 className="hero-anim text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6 opacity-0 max-w-[760px]">
             Security Services<br />Built Around You
           </h1>
-          <p className="hero-anim text-slate-light text-base sm:text-lg max-w-[580px] opacity-0">
+          <p className="hero-anim text-slate-light font-medium text-base sm:text-lg max-w-[580px] opacity-0">
             Whether you need a single guard or a full-site security program, PGP deploys licensed professionals matched to your environment, threat level, and budget.
           </p>
           <div className="hero-anim flex flex-wrap gap-3 mt-8 opacity-0">

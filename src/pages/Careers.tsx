@@ -209,8 +209,7 @@ export default function Careers() {
         <div className="absolute inset-0">
           <img src="/career1.webp" alt="" className="w-full h-full object-cover" />
           {/* Lighter veil in both themes so the photo reads clearly while the heading/body stay legible. */}
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-navy/75 via-deep-navy/45 to-deep-navy/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-navy/55 via-transparent to-deep-navy/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/75 to-deep-navy/90" />
         </div>
         <div
           className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
@@ -225,7 +224,7 @@ export default function Careers() {
             <h1 className="hero-el text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.1] mb-6 opacity-0">
               Join the PGP<br className="hidden sm:block" /> Security Team
             </h1>
-            <p className="hero-el text-slate text-lg sm:text-xl leading-relaxed max-w-[560px] opacity-0">
+            <p className="hero-el text-slate-light font-medium text-lg sm:text-xl leading-relaxed max-w-[560px] opacity-0">
               We're always looking for disciplined, professional individuals who take pride in
               keeping people safe. If you want to build a career and not just hold a job, PGP
               is where that starts.

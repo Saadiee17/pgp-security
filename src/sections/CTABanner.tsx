@@ -81,7 +81,7 @@ export default function CTABanner() {
         <h2 className="anim-el text-ice-white text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight mb-4 opacity-0">
           Don't Wait Until<br />Something Goes Wrong
         </h2>
-        <p className="anim-el text-slate text-base sm:text-lg max-w-[600px] mx-auto mb-8 opacity-0">
+        <p className="anim-el text-slate-light font-medium text-base sm:text-lg max-w-[600px] mx-auto mb-8 opacity-0">
           Get a free security assessment from PGP today. Licensed guards, rapid deployment, and a custom plan built around your property.
         </p>
 

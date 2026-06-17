@@ -85,14 +85,14 @@ export default function Locations() {
           <div className="absolute inset-0 bg-deep-navy/50" />
           <div className="absolute inset-0 bg-gradient-to-b from-deep-navy/15 via-transparent to-deep-navy/25" />
         </div>
-        <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center lg:text-left">
           <span className="anim-el opacity-0 inline-block text-gold text-sm font-semibold tracking-[0.12em] uppercase mb-5">
             SERVICE AREA
           </span>
           <h1 className="anim-el opacity-0 text-ice-white text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight mb-6">
             Locations We Serve
           </h1>
-          <p className="anim-el opacity-0 text-slate text-base sm:text-lg max-w-[600px] mx-auto leading-relaxed">
+          <p className="anim-el opacity-0 text-slate text-base sm:text-lg max-w-[600px] mx-auto lg:mx-0 leading-relaxed">
             PGP Security provides professional guard and patrol services across the Greater Houston
             metro, from downtown to the outer suburbs, with fast response times throughout the region.
           </p>
@@ -137,7 +137,7 @@ export default function Locations() {
               <Link
                 key={city.slug}
                 to={`/locations/${city.slug}`}
-                className="city-card opacity-0 flex flex-col items-center text-center gap-2 bg-midnight border border-border-subtle rounded-xl px-4 py-4 hover:border-gold/40 hover:bg-deep-navy transition-all duration-200 group"
+                className="city-card opacity-0 flex flex-col items-center text-center sm:items-start sm:text-left gap-2 bg-midnight border border-border-subtle rounded-xl px-4 py-4 hover:border-gold/40 hover:bg-deep-navy transition-all duration-200 group"
               >
                 <div className="flex items-center gap-2">
                   <MapPin size={14} className="text-gold flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
@@ -150,14 +150,14 @@ export default function Locations() {
 
           {/* Extended coverage areas */}
           <div className="border border-gold/25 rounded-2xl bg-midnight px-8 py-7 mb-6">
-            <div className="flex flex-col items-center text-center gap-4">
-              <div>
+            <div className="flex flex-col sm:flex-row sm:items-center text-center sm:text-left gap-4 sm:gap-6">
+              <div className="flex-1">
                 <h3 className="text-ice-white text-lg font-semibold mb-1">Extended service areas</h3>
                 <p className="text-slate text-sm leading-relaxed">
                   We serve additional areas beyond the cities above. Contact us to confirm coverage in your location.
                 </p>
               </div>
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-2">
                 {extendedAreas.map((area) => (
                   <span
                     key={area.name}
@@ -172,7 +172,7 @@ export default function Locations() {
           </div>
 
           {/* Don't see your area callout */}
-          <div className="border border-border-subtle rounded-2xl bg-midnight px-8 py-8 flex flex-col items-center text-center gap-6">
+          <div className="border border-border-subtle rounded-2xl bg-midnight px-8 py-8 flex flex-col sm:flex-row items-center justify-between text-center sm:text-left gap-6">
             <div>
               <h3 className="text-ice-white text-lg font-semibold mb-1">Don't see your area?</h3>
               <p className="text-slate text-sm">

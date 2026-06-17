@@ -37,25 +37,22 @@ export default function Footer() {
       }}
     >
       <div className="max-w-[1280px] mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12 text-center sm:text-left">
           {/* Brand */}
           <div>
             <Link to="/" className="inline-block">
-              <img
-                src="./pgp-logo-gold.webp"
-                alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
-                className="h-28 w-auto object-contain mb-3"
-              />
+              {/* Light mode turns the footer cream-colored, which washes out the
+                  gold logo. Set it on a dark navy plaque with a hairline gold
+                  border so the mark reads as a premium brand crest. In dark mode
+                  the footer is already navy, so the plaque is removed. */}
+              <div className="inline-flex rounded-2xl bg-gold-ink p-5 ring-1 ring-gold/25 shadow-lg shadow-gold-ink/25 transition-shadow hover:shadow-gold-glow dark:bg-transparent dark:p-0 dark:ring-0 dark:shadow-none dark:hover:shadow-none">
+                <img
+                  src="./pgp-logo-gold.webp"
+                  alt="Professional Guard & Patrol, Inc. Proudly Serving Houston Since 1985"
+                  className="h-24 w-auto object-contain"
+                />
+              </div>
             </Link>
-            <div className="text-slate text-[10px] font-semibold tracking-[0.1em] uppercase mb-3">
-              PROFESSIONAL GUARD & PATROL
-            </div>
-            <p className="text-slate-light text-sm mb-2">
-              Proudly Serving Houston Since 1985
-            </p>
-            <p className="text-slate font-mono text-xs">
-              Texas License No. B-19349
-            </p>
           </div>
 
           {/* Quick Links */}
@@ -116,7 +113,7 @@ export default function Footer() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center justify-center sm:justify-start gap-4 mt-4">
               <a
                 href="https://www.facebook.com/Professional-Guard-and-Patrol-Inc-452144301829618/"
                 target="_blank"

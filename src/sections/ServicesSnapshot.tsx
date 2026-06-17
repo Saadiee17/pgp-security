@@ -69,7 +69,7 @@ export default function ServicesSnapshot() {
     <section
       id="services-snapshot"
       ref={sectionRef}
-      className="section-texture w-full py-20 lg:py-28 bg-midnight relative overflow-hidden"
+      className="section-texture w-full py-12 lg:py-16 bg-midnight relative overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deep-navy/20 to-transparent pointer-events-none" />
 

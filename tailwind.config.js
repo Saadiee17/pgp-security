@@ -9,6 +9,12 @@ module.exports = {
         'midnight': 'rgb(var(--c-midnight) / <alpha-value>)',
         'gold': 'rgb(var(--c-gold) / <alpha-value>)',
         'gold-light': 'rgb(var(--c-gold-light) / <alpha-value>)',
+        // Fixed CTA gold — stays at the bright dark-mode gold in both themes so
+        // filled buttons keep their premium look on light backgrounds (the
+        // theme `gold` is intentionally darkened in light mode for text contrast,
+        // which looks muddy as a button fill). Pairs with text-gold-ink.
+        'gold-cta': '#C8A45E',
+        'gold-cta-light': '#D4B76A',
         'gold-ink': '#0A1628',
         'ice-white': 'rgb(var(--c-ice-white) / <alpha-value>)',
         'pure-white': 'rgb(var(--c-pure-white) / <alpha-value>)',

@@ -53,7 +53,7 @@ export default function CTABanner() {
     <section
       id="cta-banner"
       ref={sectionRef}
-      className="w-full py-20 sm:py-28 relative overflow-hidden"
+      className="w-full py-12 sm:py-16 relative overflow-hidden"
       style={{
         background:
           'linear-gradient(135deg, rgb(var(--c-deep-navy)) 0%, rgb(var(--c-midnight)) 50%, rgb(var(--c-deep-navy)) 100%)',
@@ -90,7 +90,7 @@ export default function CTABanner() {
           <button
             type="button"
             onClick={() => openAssessment()}
-            className="bg-gold text-gold-ink px-10 py-4 rounded-lg font-semibold text-base hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
+            className="bg-gold-cta text-gold-ink px-10 py-4 rounded-lg font-semibold text-base hover:bg-gold-cta-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
           >
             Get Your Free Assessment
           </button>

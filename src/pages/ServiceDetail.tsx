@@ -100,7 +100,7 @@ export default function ServiceDetail() {
             <button
               type="button"
               onClick={() => openAssessment(service.title)}
-              className="inline-flex items-center justify-center gap-2 bg-gold text-gold-ink px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] transition-all duration-200"
+              className="inline-flex items-center justify-center gap-2 bg-gold-cta text-gold-ink px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.02] transition-all duration-200"
             >
               Get a Free Assessment <ArrowRight size={16} />
             </button>

@@ -472,7 +472,7 @@ export default function About() {
                 <button
                   type="button"
                   onClick={() => openAssessment()}
-                  className="bg-gold text-gold-ink px-10 py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.25)] transition-all duration-200"
+                  className="bg-gold-cta text-gold-ink px-10 py-4 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.25)] transition-all duration-200"
                 >
                   Get a Free Assessment
                 </button>

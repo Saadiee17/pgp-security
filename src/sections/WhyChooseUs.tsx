@@ -202,7 +202,7 @@ export default function WhyChooseUs() {
             <div className="cta-btn mt-8 opacity-0">
               <Link
                 to="/contact"
-                className="inline-block bg-gold text-gold-ink px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
+                className="inline-block bg-gold-cta text-gold-ink px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
               >
                 Get Your Custom Security Plan
               </Link>

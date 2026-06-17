@@ -64,7 +64,7 @@ export default function ProblemSection() {
     <section
       id="problem"
       ref={sectionRef}
-      className="section-texture w-full py-20 lg:py-28 bg-deep-navy relative overflow-hidden"
+      className="section-texture w-full py-12 lg:py-16 bg-deep-navy relative overflow-hidden"
     >
       {/* Subtle red-tinted top edge to signal "problem" framing */}
       <div

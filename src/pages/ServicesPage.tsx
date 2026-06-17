@@ -153,7 +153,7 @@ export default function ServicesPage() {
             <button
               type="button"
               onClick={() => openAssessment()}
-              className="flex-shrink-0 inline-flex items-center gap-2 bg-gold text-gold-ink px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(200,164,94,0.25)] transition-all duration-200 whitespace-nowrap"
+              className="flex-shrink-0 inline-flex items-center gap-2 bg-gold-cta text-gold-ink px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(200,164,94,0.25)] transition-all duration-200 whitespace-nowrap"
             >
               Get a Free Assessment <ArrowRight size={16} />
             </button>

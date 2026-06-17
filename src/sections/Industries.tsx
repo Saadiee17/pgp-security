@@ -93,7 +93,7 @@ export default function Industries() {
     <section
       id="industries"
       ref={sectionRef}
-      className="section-texture w-full py-20 sm:py-24 lg:py-24 bg-midnight overflow-hidden"
+      className="section-texture w-full py-12 lg:py-16 bg-midnight overflow-hidden"
     >
       {/* Section Header */}
       <div ref={headerRef} className="max-w-[1280px] mx-auto px-6 mb-10 lg:mb-12 text-center">

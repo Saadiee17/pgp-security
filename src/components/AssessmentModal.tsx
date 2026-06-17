@@ -83,7 +83,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
         message: form.message,
       },
       {
-        subject: 'New Security Assessment Request — PGP Website',
+        subject: 'New Security Assessment Request (PGP Website)',
         from_name: 'PGP Security Website',
       },
     )
@@ -124,7 +124,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
               </DialogHeader>
               <button
                 onClick={() => handleOpenChange(false)}
-                className="mt-8 bg-gold text-gold-ink px-8 py-3 rounded-lg font-semibold text-sm hover:bg-gold-light transition-colors duration-200"
+                className="mt-8 bg-gold-cta text-gold-ink px-8 py-3 rounded-lg font-semibold text-sm hover:bg-gold-cta-light transition-colors duration-200"
               >
                 Done
               </button>
@@ -219,7 +219,7 @@ export function AssessmentProvider({ children }: { children: ReactNode }) {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-gold text-gold-ink py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
+                  className="w-full bg-gold-cta text-gold-ink py-3.5 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.01] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
                 >
                   {submitting ? (
                     <>

@@ -95,7 +95,7 @@ export default function Contact() {
         message: formData.message,
       },
       {
-        subject: 'New Security Assessment Request — PGP Website',
+        subject: 'New Security Assessment Request (PGP Website)',
         from_name: 'PGP Security Website',
       },
     )
@@ -224,7 +224,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="form-field w-full bg-gold text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-light hover:scale-[1.01] transition-all duration-200 opacity-0 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
+                className="form-field w-full bg-gold-cta text-gold-ink py-4 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.01] transition-all duration-200 opacity-0 disabled:opacity-60 disabled:pointer-events-none flex items-center justify-center gap-2"
               >
                 {submitting ? (
                   <>

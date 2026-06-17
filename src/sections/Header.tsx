@@ -71,7 +71,7 @@ export default function Header() {
           >
             <img
               src="./pgp-logo-gold.webp"
-              alt="Professional Guard & Patrol, Inc. — Proudly Serving Houston Since 1985"
+              alt="Professional Guard & Patrol, Inc. Proudly Serving Houston Since 1985"
               className="relative h-[54px] lg:h-[58px] xl:h-[64px] w-auto object-contain"
             />
           </Link>
@@ -105,7 +105,7 @@ export default function Header() {
             </button>
             <a
               href="tel:2814484900"
-              className="whitespace-nowrap bg-gold text-gold-ink px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-gold-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
+              className="whitespace-nowrap bg-gold-cta text-gold-ink px-5 py-2.5 rounded-lg text-[15px] font-semibold hover:bg-gold-cta-light hover:scale-[1.02] transition-all duration-200 flex items-center gap-2"
             >
               <Phone size={16} />
               Call Now
@@ -159,7 +159,7 @@ export default function Header() {
             </button>
             <a
               href="tel:2814484900"
-              className="bg-gold text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
+              className="bg-gold-cta text-gold-ink px-6 py-3 rounded-lg text-base font-semibold text-center flex items-center justify-center gap-2"
             >
               <Phone size={18} />
               Call Now

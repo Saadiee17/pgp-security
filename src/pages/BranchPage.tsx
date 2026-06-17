@@ -63,7 +63,7 @@ export default function BranchPage() {
           </Link>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-gold text-gold-ink px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gold-light transition-all duration-200"
+            className="inline-flex items-center gap-2 bg-gold-cta text-gold-ink px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gold-cta-light transition-all duration-200"
           >
             Contact Us
             <ArrowRight size={14} />
@@ -171,7 +171,7 @@ export default function BranchPage() {
               {branch && (
                 <a
                   href={branch.phoneHref}
-                  className="anim-el opacity-0 group flex items-center gap-3 bg-gold text-gold-ink rounded-2xl p-6 font-semibold hover:bg-gold-light transition-colors duration-200"
+                  className="anim-el opacity-0 group flex items-center gap-3 bg-gold-cta text-gold-ink rounded-2xl p-6 font-semibold hover:bg-gold-cta-light transition-colors duration-200"
                 >
                   <Phone size={18} className="flex-shrink-0" />
                   <div className="flex-1">

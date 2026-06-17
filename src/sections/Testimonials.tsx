@@ -94,7 +94,7 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-24 sm:py-32 bg-deep-navy"
+      className="w-full py-12 sm:py-16 bg-deep-navy"
     >
       <div className="max-w-[1280px] mx-auto px-6">
         {/* Header */}

@@ -42,7 +42,7 @@ export const services: Service[] = [
       'Licensed armed officers for high-risk environments and maximum deterrence.',
     image: '/service-armed-guards.webp',
     overview:
-      'When the threat level is high, a visible armed presence is the strongest deterrent there is. Our armed officers are state-licensed, background-vetted, and continuously trained in firearms safety, de-escalation, and emergency response — protecting corporate offices, financial institutions, industrial sites, and high-profile events.',
+      'When the threat level is high, a visible armed presence is the strongest deterrent there is. Our armed officers are state-licensed, background-vetted, and continuously trained in firearms safety, de-escalation, and emergency response, protecting corporate offices, financial institutions, industrial sites, and high-profile events.',
     features: [
       {
         title: 'Licensed & Certified',
@@ -52,7 +52,7 @@ export const services: Service[] = [
       {
         title: 'De-escalation First',
         description:
-          'Trained to read situations and defuse them before they escalate — force is always the last resort.',
+          'Trained to read situations and defuse them before they escalate. Force is always the last resort.',
       },
       {
         title: 'Threat Deterrence',
@@ -76,7 +76,7 @@ export const services: Service[] = [
       'Professional, approachable security for environments where visible presence matters.',
     image: '/service-unarmed-guards.webp',
     overview:
-      'Not every environment calls for a firearm — but every environment benefits from a professional, attentive presence. Our unarmed officers are ideal for offices, schools, healthcare facilities, and retail, balancing approachable customer service with sharp situational awareness.',
+      'Not every environment calls for a firearm, but every environment benefits from a professional, attentive presence. Our unarmed officers are ideal for offices, schools, healthcare facilities, and retail, balancing approachable customer service with sharp situational awareness.',
     features: [
       {
         title: 'Customer-Facing',
@@ -86,7 +86,7 @@ export const services: Service[] = [
       {
         title: 'Situational Awareness',
         description:
-          'Trained to observe, report, and respond — eyes on your property at all times.',
+          'Trained to observe, report, and respond, with eyes on your property at all times.',
       },
       {
         title: 'Cost-Effective',
@@ -110,7 +110,7 @@ export const services: Service[] = [
       'Mobile patrol in marked vehicles covering large areas on scheduled and random routes.',
     image: '/service-patrol.webp',
     overview:
-      'Cover more ground for less cost. Our marked patrol vehicles provide a visible, unpredictable security presence across neighborhoods, business parks, construction sites, and large commercial properties — combining scheduled checks with randomized routes that keep would-be intruders guessing.',
+      'Cover more ground for less cost. Our marked patrol vehicles provide a visible, unpredictable security presence across neighborhoods, business parks, construction sites, and large commercial properties, combining scheduled checks with randomized routes that keep would-be intruders guessing.',
     features: [
       {
         title: 'Marked Vehicles',
@@ -143,7 +143,7 @@ export const services: Service[] = [
     blurb: '24/7 monitoring with rapid dispatch the moment your alarm triggers.',
     image: '/service-alarm-response.webp',
     overview:
-      'A triggered alarm is only useful if someone responds — fast. Our 24/7 dispatch team reacts the moment your system activates, sending trained officers to assess the situation, secure the property, and coordinate with authorities, so you are never left waiting and exposed.',
+      'A triggered alarm is only useful if someone responds fast. Our 24/7 dispatch team reacts the moment your system activates, sending trained officers to assess the situation, secure the property, and coordinate with authorities, so you are never left waiting and exposed.',
     features: [
       {
         title: 'Rapid Dispatch',
@@ -174,10 +174,10 @@ export const services: Service[] = [
     icon: Calendar,
     title: 'Temporary Security',
     blurb:
-      'Flexible security for events, short-term projects, and emergencies — deployed swiftly.',
+      'Flexible security for events, short-term projects, and emergencies, deployed swiftly.',
     image: '/service-temporary.webp',
     overview:
-      'Security needs are not always permanent. Whether it is a one-day event, a seasonal surge, a labor dispute, or an emergency gap in coverage, we deploy licensed officers on short notice and scale up or down as your situation changes — no long-term commitment required.',
+      'Security needs are not always permanent. Whether it is a one-day event, a seasonal surge, a labor dispute, or an emergency gap in coverage, we deploy licensed officers on short notice and scale up or down as your situation changes, with no long-term commitment required.',
     features: [
       {
         title: 'Same-Day Deployment',
@@ -192,7 +192,7 @@ export const services: Service[] = [
       {
         title: 'No Long-Term Lock-In',
         description:
-          'Flexible terms from a single day to several months — pay only for what you need.',
+          'Flexible terms from a single day to several months, so you pay only for what you need.',
       },
     ],
     included: [

@@ -137,7 +137,7 @@ export default function Locations() {
               <Link
                 key={city.slug}
                 to={`/locations/${city.slug}`}
-                className="city-card opacity-0 flex flex-col gap-2 bg-midnight border border-border-subtle rounded-xl px-4 py-4 hover:border-gold/40 hover:bg-deep-navy transition-all duration-200 group"
+                className="city-card opacity-0 flex flex-col items-center text-center gap-2 bg-midnight border border-border-subtle rounded-xl px-4 py-4 hover:border-gold/40 hover:bg-deep-navy transition-all duration-200 group"
               >
                 <div className="flex items-center gap-2">
                   <MapPin size={14} className="text-gold flex-shrink-0 group-hover:scale-110 transition-transform duration-200" />
@@ -150,14 +150,14 @@ export default function Locations() {
 
           {/* Extended coverage areas */}
           <div className="border border-gold/25 rounded-2xl bg-midnight px-8 py-7 mb-6">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-              <div className="flex-1">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div>
                 <h3 className="text-ice-white text-lg font-semibold mb-1">Extended service areas</h3>
                 <p className="text-slate text-sm leading-relaxed">
-                  We serve additional areas beyond the cities above — contact us to confirm coverage in your location.
+                  We serve additional areas beyond the cities above. Contact us to confirm coverage in your location.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-2">
                 {extendedAreas.map((area) => (
                   <span
                     key={area.name}
@@ -172,7 +172,7 @@ export default function Locations() {
           </div>
 
           {/* Don't see your area callout */}
-          <div className="border border-border-subtle rounded-2xl bg-midnight px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="border border-border-subtle rounded-2xl bg-midnight px-8 py-8 flex flex-col items-center text-center gap-6">
             <div>
               <h3 className="text-ice-white text-lg font-semibold mb-1">Don't see your area?</h3>
               <p className="text-slate text-sm">
@@ -181,7 +181,7 @@ export default function Locations() {
             </div>
             <Link
               to="/contact"
-              className="flex-shrink-0 flex items-center gap-2 bg-gold text-gold-ink px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gold-light transition-all duration-200 group"
+              className="flex-shrink-0 flex items-center gap-2 bg-gold-cta text-gold-ink px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gold-cta-light transition-all duration-200 group"
             >
               Contact Us
               <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />

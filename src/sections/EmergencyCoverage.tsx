@@ -79,7 +79,7 @@ export default function EmergencyCoverage() {
                 Emergency Coverage at a Moment's Notice
               </h2>
               <p className="anim-el text-slate text-sm sm:text-base mt-1 opacity-0">
-                Urgent security need? We deploy licensed guards fast — day or night, weekends included.
+                Urgent security need? We deploy licensed guards fast, day or night, weekends included.
               </p>
             </div>
           </div>

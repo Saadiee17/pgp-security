@@ -353,9 +353,10 @@ export default function IndustriesPage() {
                     <button
                       type="button"
                       onClick={() => openAssessment(`${name} Security`)}
-                      className="inline-flex items-center gap-2 text-gold text-sm font-medium hover:gap-3 transition-all duration-200"
+                      className="group inline-flex items-center gap-2 bg-gold-cta text-gold-ink px-6 py-3 rounded-lg font-semibold text-sm hover:bg-gold-cta-light hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(200,164,94,0.3)] transition-all duration-200"
                     >
-                      Request a {name.toLowerCase()} assessment <ArrowRight size={15} />
+                      Request a {name.toLowerCase()} assessment
+                      <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform duration-200" />
                     </button>
                   </div>
                 </div>

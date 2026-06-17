@@ -274,10 +274,10 @@ export default function Hero() {
             <button
               type="button"
               onClick={() => openAssessment()}
-              className="group relative overflow-hidden bg-gold text-gold-ink px-6 py-3 sm:px-9 sm:py-4 rounded-sm font-semibold text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.2em] uppercase shadow-[0_0_0_1px_rgba(200,164,94,0.6),0_0_40px_rgba(200,164,94,0.25)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(200,164,94,0.9),0_0_60px_rgba(200,164,94,0.45)] max-w-full"
+              className="group relative overflow-hidden bg-gold-cta text-gold-ink px-6 py-3 sm:px-9 sm:py-4 rounded-sm font-semibold text-[10px] sm:text-xs tracking-[0.14em] sm:tracking-[0.2em] uppercase shadow-[0_0_0_1px_rgba(200,164,94,0.6),0_0_40px_rgba(200,164,94,0.25)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(200,164,94,0.9),0_0_60px_rgba(200,164,94,0.45)] max-w-full"
             >
               <span className="relative z-10">Get Free Security Assessment</span>
-              <span className="absolute inset-0 bg-gold-light translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <span className="absolute inset-0 bg-gold-cta-light translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </button>
             <a
               href="tel:2814484900"

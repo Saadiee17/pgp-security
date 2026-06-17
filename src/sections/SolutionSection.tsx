@@ -64,7 +64,7 @@ export default function SolutionSection() {
     <section
       id="solution"
       ref={sectionRef}
-      className="section-texture w-full py-20 lg:py-28 bg-midnight relative overflow-hidden"
+      className="section-texture w-full py-12 lg:py-16 bg-midnight relative overflow-hidden"
     >
       {/* Gold accent top edge to signal optimism / contrast with Problem */}
       <div

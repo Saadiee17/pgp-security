@@ -44,7 +44,7 @@ export default function LocationsSection() {
     <section
       id="locations"
       ref={sectionRef}
-      className="w-full py-20 lg:py-28 bg-deep-navy relative overflow-hidden"
+      className="w-full py-12 lg:py-16 bg-deep-navy relative overflow-hidden"
     >
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         {/* Header */}
